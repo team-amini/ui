@@ -12,6 +12,7 @@ import ActivityView from './components/ActivityView'
 import News from './components/News'
 import FakeData from './FakeData'
 import Login from './Login'
+import API from './API'
 
 let sourceUrl = `http://amini.canadaeast.cloudapp.azure.com:8080/stream`
 
@@ -23,9 +24,14 @@ class App extends Component {
   }
 
   componentDidMount() {
+    this.api = new API();
     source.onmessage = e => {
       console.log(JSON.parse(e.data))
     }
+
+    this.api.getHistory(1, 2).then((d)=> {
+      console.log('API history', d);
+    });
   }
 
   render() {
