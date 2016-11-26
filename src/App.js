@@ -69,7 +69,7 @@ class App extends Component {
               <ActivityView
                 selectedTransaction={this.state.selectedTransaction}
                 selectTransaction={selectedTransaction => this.setState({ selectedTransaction })}
-                data={FakeData.fakeValues()}
+                data={FakeData.fakeValues({ amountRange: this.state.amountRange })}
               />
             </Col>
           </Row>

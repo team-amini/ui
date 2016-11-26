@@ -1,143 +1,112 @@
 import _ from 'lodash'
-import React, { Component } from 'react'
-import { style as css } from 'glamor'
-import * as d3 from 'd3'
+import React from 'react'
 
-export default class ActivityView extends Component {
+let transformData = data => {
+  // Eh...too tired to optimize this crap
+  let agg = _.groupBy(data, d => d.from)
+  let keys = Object.keys(agg)
 
-  constructor() {
-    super();
-    this.state = {
-      topSendersByTX:[],
-      topSendersByValue:[],
-      topReceiversByTX: [],
-      topReceiversByValue: []
-    }
+  let senders = keys.map(key => ({
+    id: key,
+    numTX: agg[key].length,
+    totalValue: _.sum(agg[key].map(d => d.v)),
+  }))
+
+  agg = _.groupBy(data, d => d.to)
+  keys = Object.keys(agg)
+
+  let receivers = keys.map(key => ({
+    id: key,
+    numTX: agg[key].length,
+    totalValue: _.sum(agg[key].map(d => d.v)),
+  }))
+
+  let num = 10
+
+  let topSendersByTX = _.take(senders.sort(d => { -d.numTX }), num)
+  let topSendersByValue = _.take(senders.sort(d => { -d.totalValue}), num)
+
+  let topReceiversByTX = _.take(receivers.sort(d => { -d.numTX }), num)
+  let topReceiversByValue = _.take(receivers.sort(d => { -d.totalValue}), num)
+
+  return {
+    topSendersByTX,
+    topSendersByValue,
+    topReceiversByTX,
+    topReceiversByValue,
   }
+}
 
-  componentDidMount() {
-    let data = this.props.data;
-    // let element = d3.select(this.node);
+export default ({ data, selectTransaction }) => {
+  let {
+    topSendersByTX: a,
+    topSendersByValue: b,
+    topReceiversByTX: c,
+    topReceiversByValue: d,
+  } = transformData(data)
 
-    /*
-    let w = parseFloat(element.style('width'));
-    let h = parseFloat(element.style('height'));
+  let topSendersByTX = a.map(d =>
+    <tr key={d.id + '-s1'} onClick={() => selectTransaction(d)}>
+      <td>{d.id}</td>
+      <td style={{textAlign:'right'}}>{d.numTX}</td>
+    </tr>
+  )
 
-    let svg = element.append('svg')
-      .attr('width', '100%')
-      .attr('height', '100%')
-      .attr('viewbox', '0 0 ' + w + ' ' + h)
-      .attr('preserveAspectRatio', 'xMinYMin');
+  let topSendersByValue = b.map(d =>
+    <tr key={d.id + '-s2'} onClick={() => selectTransaction(d)}>
+      <td>{d.id}</td>
+      <td style={{textAlign:'right'}}>{d.totalValue}</td>
+    </tr>
+  )
 
-    let g = svg.append('g');
-    */
+  let topReceiversByTX = c.map(d =>
+    <tr key={d.id + '-r1'} onClick={() => selectTransaction(d)}>
+      <td>{d.id}</td>
+      <td style={{textAlign:'right'}}>{d.numTX}</td>
+    </tr>
+  )
 
-    // Eh...too tired to optimize this crap
-    let agg = _.groupBy(data, (d)=>{return d.from});
-    let keys = Object.keys(agg);
-    let senders = [];
-    let receivers = [];
+  let topReceiversByValue = d.map(d =>
+    <tr key={d.id + '-r2'} onClick={() => selectTransaction(d)}>
+      <td>{d.id}</td>
+      <td style={{ textAlign: `right` }}>{d.totalValue}</td>
+    </tr>
+  )
 
-    keys.forEach((key) => {
-      senders.push({
-        id: key,
-        numTX: agg[key].length,
-        totalValue: _.sum(agg[key].map(d=>d.v))
-      });
-    });
-
-    agg = _.groupBy(data, (d)=>{return d.to});
-    keys = Object.keys(agg);
-    keys.forEach((key) => {
-      receivers.push({
-        id: key,
-        numTX: agg[key].length,
-        totalValue: _.sum(agg[key].map(d=>d.v))
-      });
-    });
-
-
-    let num = 10;
-
-    let topSendersByTX = _.take(senders.sort((d)=> { -d.numTX }), num);
-    let topSendersByValue = _.take(senders.sort((d)=> { -d.totalValue}), num);
-
-    let topReceiversByTX = _.take(receivers.sort((d)=> { -d.numTX }), num);
-    let topReceiversByValue = _.take(receivers.sort((d)=> { -d.totalValue}), num);
-
-    this.setState({
-      topSendersByTX: topSendersByTX,
-      topSendersByValue: topSendersByValue,
-      topReceiversByTX: topReceiversByTX,
-      topReceiversByValue: topReceiversByValue
-    });
-  }
-
-  render() {
-
-    let topSendersByTX = this.state.topSendersByTX.map(d =>
-      <tr key={d.id + '-s1'} onClick={() => this.props.selectTransaction(d)}>
-        <td>{d.id}</td>
-        <td style={{textAlign:'right'}}>{d.numTX}</td>
-      </tr>
-    )
-
-    let topSendersByValue = this.state.topSendersByValue.map(d =>
-      <tr key={d.id + '-s2'} onClick={() => this.props.selectTransaction(d)}>
-        <td>{d.id}</td>
-        <td style={{textAlign:'right'}}>{d.totalValue}</td>
-      </tr>
-    )
-
-    let topReceiversByTX = this.state.topReceiversByTX.map(d =>
-      <tr key={d.id + '-r1'} onClick={() => this.props.selectTransaction(d)}>
-        <td>{d.id}</td>
-        <td style={{textAlign:'right'}}>{d.numTX}</td>
-      </tr>
-    )
-
-    let topReceiversByValue = this.state.topReceiversByValue.map(d =>
-      <tr key={d.id + '-r2'} onClick={() => this.props.selectTransaction(d)}>
-        <td>{d.id}</td>
-        <td style={{ textAlign: `right` }}>{d.totalValue}</td>
-      </tr>
-    )
-
-    return (
-      <div style={{ padding: `10px` }}>
-        <div style={{ color: `silver`, padding: `12px`, fontWeight: 100 }}>
-          Most Active Clients
-        </div>
-        <div style={{display:'flex', 'justifyContent':'center', margin: '5px'}}>
-          <table>
-            <thead>
-              <tr><th>Top Senders</th><th># TX</th></tr>
-            </thead>
-            <tbody>{topSendersByTX}</tbody>
-          </table>
-
-          <table>
-            <thead>
-              <tr><th>Top Senders</th><th>Amt</th></tr>
-            </thead>
-            <tbody>{topSendersByValue}</tbody>
-          </table>
-
-          <table>
-            <thead>
-              <tr><th>Top Receivers</th><th># TX</th></tr>
-            </thead>
-            <tbody>{topReceiversByTX}</tbody>
-          </table>
-
-          <table>
-            <thead>
-              <tr><th>Top Receivers</th><th>Amt</th></tr>
-            </thead>
-            <tbody>{topReceiversByValue}</tbody>
-          </table>
-        </div>
+  return (
+    <div style={{ padding: `10px` }}>
+      <div style={{ color: `silver`, padding: `12px`, fontWeight: 100 }}>
+        Most Active Clients
       </div>
-    )
-  }
+      <div style={{display:'flex', 'justifyContent':'center', margin: '5px'}}>
+        <table>
+          <thead>
+            <tr><th>Top Senders</th><th># TX</th></tr>
+          </thead>
+          <tbody>{topSendersByTX}</tbody>
+        </table>
+
+        <table>
+          <thead>
+            <tr><th>Top Senders</th><th>Amt</th></tr>
+          </thead>
+          <tbody>{topSendersByValue}</tbody>
+        </table>
+
+        <table>
+          <thead>
+            <tr><th>Top Receivers</th><th># TX</th></tr>
+          </thead>
+          <tbody>{topReceiversByTX}</tbody>
+        </table>
+
+        <table>
+          <thead>
+            <tr><th>Top Receivers</th><th>Amt</th></tr>
+          </thead>
+          <tbody>{topReceiversByValue}</tbody>
+        </table>
+      </div>
+    </div>
+  )
 }
