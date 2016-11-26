@@ -12,7 +12,9 @@ export default class MapView extends Component {
 
       let canvas = document.querySelector(`canvas`)
 
-      canvas.width = canvas.width
+      // canvas.width = canvas.width
+      var ctx = canvas.getContext('2d');
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
 
       this.drawMap(next.data)
     }
@@ -40,10 +42,10 @@ export default class MapView extends Component {
 
       let midx = x1 + (x2 - x1) / 2
 
-      console.log(x1, y1, midx, y1, midx, y2, x2, y2)
+      // console.log(x1, y1, midx, y1, midx, y2, x2, y2)
 
       let bezier = new window.Bezier(x1, y1, midx, y1, midx, y2, x2, y2)
-      let points = bezier.getLUT(10)
+      let points = bezier.getLUT(20)
       let pointsPrime = points.map((p, i) => [p.x, p.y, i])
 
       let hotline = window.L.hotline(pointsPrime, {
