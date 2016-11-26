@@ -45,18 +45,18 @@ class App extends Component {
               <MapView data={FakeData.fakeGeo()} />
             </Col>
             <Col flex="1">
-              <News />
+              <News data={FakeData.fakeNews()} />
             </Col>
           </Row>
           <Row>
             <Col flex="1" style={{ padding: `10px` }}>
-              <BarChart data={FakeData.fakeChartValues()} label="Chart 1" />
+              <BarChart data={FakeData.fakeChartValues()}/>
             </Col>
             <Col flex="1">
               <ActivityView
                 selectedTransaction={this.state.selectedTransaction}
                 selectTransaction={selectedTransaction => this.setState({ selectedTransaction })}
-                data={FakeData.fakeValues()} label="chart 2"
+                data={FakeData.fakeValues()}
               />
             </Col>
           </Row>

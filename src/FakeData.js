@@ -4,6 +4,10 @@ export default class FakeData {
 
   static num = 50;
 
+  static fakeNews() {
+    return _.take(this.test, 10);
+  }
+
 
   static fakeChartValues() {
     let r = this.test.map((d)=> {
