@@ -26,8 +26,6 @@ let App = ({ state, setState }) => {
     <Layout>
       <Center style={{ height: `calc(100vh - 5px)` }}>
         <Col className={heroContainer}>
-          <img className={heroHands} src={hands} />
-          <img className={heroLogo} src={logoWhite} />
           <span className={slogan}>Somethiasdasdasng something something blockchain.</span>
           <BarChart data={FakeData.fakeValues()} label="chart 1"></BarChart>
           <MapView data={FakeData.fakeGeo()}></MapView>

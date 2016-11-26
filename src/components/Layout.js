@@ -1,12 +1,12 @@
 import React from 'react'
 import { style as css } from 'glamor'
 import { Row, Col } from '../uikit/Flex'
-import logoWhite from '../../public/logo-white.svg'
+import logo from '../../public/logo.png'
 
 export default ({ children }) => (
   <Col>
     <Row className={header}>
-      <img className={navLogo} src={logoWhite} />
+      <img className={navLogo} src={logo} />
       <span style={{ marginLeft: `auto` }}>
         <Row className={hideSmall} spacing="25px">
           {/* <span><Link to="/about"><a className={navLink}>ABOUT</a></Link></span> */}
@@ -20,6 +20,7 @@ export default ({ children }) => (
 
 let navLogo = css({
   width: `100px`,
+  height: `40px`,
 })
 
 let navLink = css({
