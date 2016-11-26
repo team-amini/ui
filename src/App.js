@@ -22,6 +22,10 @@ class App extends Component {
   state = {
     loggedIn: false,
     selectedTransaction: null,
+    timeRange: {
+      min: 2,
+      max: 10,
+    },
   }
 
   componentDidMount() {
@@ -38,8 +42,14 @@ class App extends Component {
   render() {
     //if (!state.loggedIn) return <Login setState={setState} />
     return (
-      <Layout {...this.state}>
-        <Col className={heroContainer}>
+      <Layout
+        handleRangeChange={(component, timeRange) => {
+          console.log(123, timeRange)
+          this.setState({ timeRange })
+        }}
+        {...this.state}
+      >
+        <Col>
           <Row>
             <Col flex="1">
               <MapView data={FakeData.fakeGeo()} />
@@ -65,10 +75,6 @@ class App extends Component {
     )
   }
 }
-
-let heroContainer = css({
-  marginBottom: `200px`,
-})
 
 let heroHands = css({
   width: `150px`,

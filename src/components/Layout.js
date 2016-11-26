@@ -2,8 +2,9 @@ import React from 'react'
 import { style as css } from 'glamor'
 import { Row, Col } from '../uikit/Flex'
 import logo from '../../public/logo.png'
+import InputRange from 'react-input-range'
 
-export default ({ selectedTransaction, children }) => (
+export default ({ selectedTransaction, timeRange, handleRangeChange, children }) => (
   <Col>
     <Row className={header}>
       <img className={navLogo} src={logo} />
@@ -13,9 +14,28 @@ export default ({ selectedTransaction, children }) => (
         }
       </span>
     </Row>
-    <Col style={{ marginTop: `80px` }}>{children}</Col>
+    <Row style={{ marginTop: `80px` }}>
+      <Col className={sidebar}>
+        <Col style={{ padding: `20px`, marginTop: `20px` }}>
+          <div style={{ color: `white`, paddingBottom: `30px` }}>Date Range</div>
+          <InputRange
+            maxValue={20}
+            minValue={0}
+            value={timeRange}
+            onChange={handleRangeChange}
+          />
+        </Col>
+      </Col>
+      <Col flex="1">{children}</Col>
+    </Row>
   </Col>
 )
+
+let sidebar = css({
+  backgroundColor: `#1e1e1e`,
+  width: `280px`,
+  borderRight: `1px solid rgb(45, 49, 51)`,
+})
 
 let navLogo = css({
   width: `100px`,
@@ -33,12 +53,11 @@ let navLink = css({
 let header = css({
   position: `fixed !important`,
   width: `100vw`,
-  // lineHeight: `80px`,
   color: `rgb(0, 0, 0)`,
+  backgroundColor: `#00d3b1`,
   padding: `0 50px`,
   zIndex: 100000,
   padding: `20px`,
-  backgroundColor: `white`,
 })
 
 let hideSmall = css({

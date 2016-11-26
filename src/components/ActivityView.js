@@ -99,39 +99,44 @@ export default class ActivityView extends Component {
     let topReceiversByValue = this.state.topReceiversByValue.map(d =>
       <tr key={d.id + '-r2'} onClick={() => this.props.selectTransaction(d)}>
         <td>{d.id}</td>
-        <td style={{textAlign:'right'}}>{d.totalValue}</td>
+        <td style={{ textAlign: `right` }}>{d.totalValue}</td>
       </tr>
     )
 
     return (
-      <div style={{display:'flex', 'justifyContent':'center', margin: '5px'}}>
-        <table>
-          <thead>
-            <tr><th>Top Senders</th><th># TX</th></tr>
-          </thead>
-          <tbody>{topSendersByTX}</tbody>
-        </table>
+      <div style={{ padding: `10px` }}>
+        <div style={{ color: `silver`, padding: `12px`, fontWeight: 100 }}>
+          Latest Activity
+        </div>
+        <div style={{display:'flex', 'justifyContent':'center', margin: '5px'}}>
+          <table>
+            <thead>
+              <tr><th>Top Senders</th><th># TX</th></tr>
+            </thead>
+            <tbody>{topSendersByTX}</tbody>
+          </table>
 
-        <table>
-          <thead>
-            <tr><th>Top Senders</th><th>Amt</th></tr>
-          </thead>
-          <tbody>{topSendersByValue}</tbody>
-        </table>
+          <table>
+            <thead>
+              <tr><th>Top Senders</th><th>Amt</th></tr>
+            </thead>
+            <tbody>{topSendersByValue}</tbody>
+          </table>
 
-        <table>
-          <thead>
-            <tr><th>Top Receivers</th><th># TX</th></tr>
-          </thead>
-          <tbody>{topReceiversByTX}</tbody>
-        </table>
+          <table>
+            <thead>
+              <tr><th>Top Receivers</th><th># TX</th></tr>
+            </thead>
+            <tbody>{topReceiversByTX}</tbody>
+          </table>
 
-        <table>
-          <thead>
-            <tr><th>Top Receivers</th><th>Amt</th></tr>
-          </thead>
-          <tbody>{topReceiversByValue}</tbody>
-        </table>
+          <table>
+            <thead>
+              <tr><th>Top Receivers</th><th>Amt</th></tr>
+            </thead>
+            <tbody>{topReceiversByValue}</tbody>
+          </table>
+        </div>
       </div>
     )
   }

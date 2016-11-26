@@ -4611,6 +4611,10 @@ react-helmet@^3.2.2:
     shallowequal "0.2.2"
     warning "3.0.0"
 
+react-input-range@^0.9.3:
+  version "0.9.3"
+  resolved "https://registry.yarnpkg.com/react-input-range/-/react-input-range-0.9.3.tgz#77f321b5eea1f0480bd88929aabbe5600588f265"
+
 react-redux@^4.4.6:
   version "4.4.6"
   resolved "https://registry.yarnpkg.com/react-redux/-/react-redux-4.4.6.tgz#4b9d32985307a11096a2dd61561980044fcc6209"
