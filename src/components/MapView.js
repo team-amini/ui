@@ -14,6 +14,17 @@ export default class MapView extends Component {
         accessToken: token
     }).addTo(mymap);
 
+    let data = this.props.data;
+
+    data.forEach((d)=> {
+      var circle = window.L.circle([d.lat, d.lng], {
+        color: 'red',
+        fillColor: '#f03',
+        fillOpacity: 0.5,
+        radius: 50000
+      }).addTo(mymap);
+    });
+
   }
 
   render() {
