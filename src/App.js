@@ -15,21 +15,17 @@ import Login from './Login'
 
 let sourceUrl = `http://amini.canadaeast.cloudapp.azure.com:8080/stream`
 
+let source = new EventSource(sourceUrl)
+
 class App extends Component {
   state = {
     loggedIn: false,
-    source: null,
   }
 
   componentDidMount() {
-    let { source } = this.state
-
-    if (this.state.source) {
-      source.onmessage = e => {
-        console.log(JSON.parse(e.data))
-      }
+    source.onmessage = e => {
+      console.log(JSON.parse(e.data))
     }
-    else this.setState({ source: new EventSource(sourceUrl) })
   }
 
   render() {
