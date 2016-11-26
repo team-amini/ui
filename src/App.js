@@ -27,8 +27,8 @@ class App extends Component {
       max: 10,
     },
     amountRange: {
-      min: 0,
-      max: 1000,
+      min: 250,
+      max: 500,
     },
   }
 

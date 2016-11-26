@@ -45,7 +45,7 @@ export default class MapView extends Component {
       // console.log(x1, y1, midx, y1, midx, y2, x2, y2)
 
       let bezier = new window.Bezier(x1, y1, midx, y1, midx, y2, x2, y2)
-      let points = bezier.getLUT(20)
+      let points = bezier.getLUT(12)
       let pointsPrime = points.map((p, i) => [p.x, p.y, i])
 
       let hotline = window.L.hotline(pointsPrime, {
