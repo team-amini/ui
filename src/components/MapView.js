@@ -29,8 +29,8 @@ export default class MapView extends Component {
 
   render() {
     return (
-      <div>
-        <div id="mapview" style={{'height': '300px', 'width': '600px'}}></div>
+      <div style={{ marginTop: `50px` }}>
+        <div id="mapview" style={{ height: `500px`, width: `100vw` }} />
       </div>
     )
   }
