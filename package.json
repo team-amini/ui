@@ -9,10 +9,12 @@
   },
   "dependencies": {
     "babel-eslint": "^7.1.1",
+    "d3": "^4.4.0",
     "eslint": "^3.11.0",
     "eslint-config-minimal": "^0.1.5",
     "eslint-plugin-react": "^6.7.1",
     "glamor": "^2.19.0",
+    "lodash": "^4.17.2",
     "react": "^15.4.1",
     "react-dom": "^15.4.1",
     "react-redux": "^4.4.6",
