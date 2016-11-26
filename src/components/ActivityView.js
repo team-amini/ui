@@ -98,7 +98,6 @@ export default class ActivityView extends Component {
     return (
       <div style={{display:'flex', 'justifyContent':'center', margin: '5px'}}>
         <div>
-          <div>Top senders by # TX</div>
           <table className={activityTable}>
             <thead>
               <tr><th>Sender</th><th># TX</th></tr>
@@ -108,7 +107,6 @@ export default class ActivityView extends Component {
         </div>
 
         <div>
-          <div>Top senders by value</div>
           <table className={activityTable}>
             <thead>
               <tr><th>Sender</th><th>Amt</th></tr>
@@ -118,7 +116,6 @@ export default class ActivityView extends Component {
         </div>
 
         <div>
-          <div>Top receivers by # TX</div>
           <table className={activityTable}>
             <thead>
               <tr><th>Receiver</th><th># TX</th></tr>
@@ -128,7 +125,6 @@ export default class ActivityView extends Component {
         </div>
 
         <div>
-          <div>Top receivers by value</div>
           <table className={activityTable}>
             <thead>
               <tr><th>Receiver</th><th>Amt</th></tr>

@@ -9,6 +9,7 @@ import chartSvg from '../public/chart.svg'
 import BarChart from './components/BarChart'
 import MapView from './components/MapView'
 import ActivityView from './components/ActivityView'
+import News from './components/News'
 import FakeData from './FakeData'
 import Login from './Login'
 
@@ -26,12 +27,14 @@ let App = ({ state, setState }) => {
     <Layout>
       <Center>
         <Col className={heroContainer}>
-          <div style={{display: 'flex', justifyContent:'space-around'}}>
+          <div style={{display: 'flex', justifyContent:'space-between', width:'100%'}}>
             <MapView data={FakeData.fakeGeo()}></MapView>
-            <ActivityView data={FakeData.fakeValues()} label="chart 2"/>
+            <News></News>
           </div>
-          <div style={{display: 'flex', justifyContent:'space-around'}}>
+          <br/>
+          <div style={{display: 'flex', justifyContent:'space-between', width: '100%'}}>
             <BarChart data={FakeData.fakeChartValues()} label="Chart 1"></BarChart>
+            <ActivityView data={FakeData.fakeValues()} label="chart 2"/>
           </div>
         </Col>
       </Center>
