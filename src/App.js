@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Component } from 'react'
 import Layout from './components/Layout'
 import { style as css } from 'glamor'
 import { withState } from 'recompose'
@@ -9,56 +9,67 @@ import chartSvg from '../public/chart.svg'
 import BarChart from './components/BarChart'
 import MapView from './components/MapView'
 import ActivityView from './components/ActivityView'
-import News from './components/News'
+// import News from './components/News'
 import FakeData from './FakeData'
 import Login from './Login'
 
-let enhance = withState(
-  `state`,
-  `setState`,
-  {
-    loggedIn: false,
-  }
-)
+let sourceUrl = `http://amini.canadaeast.cloudapp.azure.com:8080/stream`
 
-let App = ({ state, setState }) => {
+class App extends Component {
+  state = {
+    loggedIn: false,
+    source: null,
+  }
+
+  componentDidMount() {
+    let { source } = this.state
+
+    if (this.state.source) {
+      source.onmessage = e => {
+        console.log(JSON.parse(e.data))
+      }
+    }
+    else this.setState({ source: new EventSource(sourceUrl) })
+  }
+
+  render() {
   //if (!state.loggedIn) return <Login setState={setState} />
-  return (
-    <Layout>
-      <Center>
-        <Col className={heroContainer}>
-          <div style={{display: 'flex', justifyContent:'space-between', width:'100%'}}>
-            <MapView data={FakeData.fakeGeo()}></MapView>
-            <News></News>
-          </div>
-          <br/>
-          <div style={{display: 'flex', justifyContent:'space-between', width: '100%'}}>
-            <BarChart data={FakeData.fakeChartValues()} label="Chart 1"></BarChart>
-            <ActivityView data={FakeData.fakeValues()} label="chart 2"/>
-          </div>
-        </Col>
-      </Center>
-      <Col className={card}>
-        <Row className={cardPadding}>
-          <Col flex="1">
-            <h1>We make your life easier by blah blah</h1>
-            <p>
-              Bacon ipsum dolor amet leberkas chicken tenderloin, beef ribs ground
-              round frankfurter doner porchetta. Burgdoggen turkey bacon andouille
-              cow pig prosciutto venison tongue ground round biltong drumstick beef
-              ribs picanha. Shankle hamburger sausage shank kielbasa boudin pork chop
-              alcatra pork belly. Kielbasa short ribs ham brisket, salami meatball
-              drumstick sirloin shank fatback chicken. Ham hock jowl pastrami turducken
-              leberkas, tri-tip porchetta beef landjaeger hamburger kevin picanha.
-            </p>
+    return (
+      <Layout>
+        <Center>
+          <Col className={heroContainer}>
+            <div style={{display: 'flex', justifyContent:'space-between', width:'100%'}}>
+              <MapView data={FakeData.fakeGeo()} />
+            </div>
+            <br/>
+            <div style={{display: 'flex', justifyContent:'space-between', width: '100%'}}>
+              <BarChart data={FakeData.fakeChartValues()} label="Chart 1" />
+              <ActivityView data={FakeData.fakeValues()} label="chart 2"/>
+            </div>
           </Col>
-          <Center flex="1">
-            <img className={chart} src={chartSvg} />
-          </Center>
-        </Row>
-      </Col>
-    </Layout>
-  )
+        </Center>
+        <Col className={card}>
+          <Row className={cardPadding}>
+            <Col flex="1">
+              <h1>We make your life easier by blah blah</h1>
+              <p>
+                Bacon ipsum dolor amet leberkas chicken tenderloin, beef ribs ground
+                round frankfurter doner porchetta. Burgdoggen turkey bacon andouille
+                cow pig prosciutto venison tongue ground round biltong drumstick beef
+                ribs picanha. Shankle hamburger sausage shank kielbasa boudin pork chop
+                alcatra pork belly. Kielbasa short ribs ham brisket, salami meatball
+                drumstick sirloin shank fatback chicken. Ham hock jowl pastrami turducken
+                leberkas, tri-tip porchetta beef landjaeger hamburger kevin picanha.
+              </p>
+            </Col>
+            <Center flex="1">
+              <img className={chart} src={chartSvg} />
+            </Center>
+          </Row>
+        </Col>
+      </Layout>
+    )
+  }
 }
 
 let heroContainer = css({
@@ -91,4 +102,4 @@ let cardPadding = css({
   padding: `100px`,
 })
 
-export default enhance(App)
+export default App
