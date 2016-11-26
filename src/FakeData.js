@@ -21,7 +21,12 @@ export default class FakeData {
     return this.test.map((d)=> {
       return {
         lat: d.fromPoint.latitude,
-        lng: d.fromPoint.longitude
+        lng: d.fromPoint.longitude,
+
+        f_lat: d.fromPoint.latitude,
+        f_lng: d.fromPoint.longitude,
+        t_lat: d.toPoint.latitude,
+        t_lng: d.toPoint.longitude
       }
     });
   }

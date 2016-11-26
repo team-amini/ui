@@ -26,12 +26,13 @@ let App = ({ state, setState }) => {
     <Layout>
       <Center style={{ height: `calc(100vh - 5px)` }}>
         <Col className={heroContainer}>
-          <BarChart data={FakeData.fakeValues()} label="chart 1"></BarChart>
           <MapView data={FakeData.fakeGeo()}></MapView>
+          <BarChart data={FakeData.fakeValues()} label="chart 1"></BarChart>
           <BarChart data={FakeData.fakeValues()} label="chart 2"></BarChart>
           <BarChart data={FakeData.fakeValues()} label="chart 3"></BarChart>
         </Col>
       </Center>
+      /*
       <Col className={card}>
         <Row className={cardPadding}>
           <Col flex="1">
@@ -51,6 +52,7 @@ let App = ({ state, setState }) => {
           </Center>
         </Row>
       </Col>
+      */
     </Layout>
   )
 }
