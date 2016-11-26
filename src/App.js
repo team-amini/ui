@@ -1,24 +1,18 @@
 import React from 'react'
 import Layout from './components/Layout'
-import { style as css, insertRule } from 'glamor'
-import Head from 'react-helmet'
+import { style as css } from 'glamor'
 import { Row, Col, Center } from './uikit/Flex'
 import hands from '../public/hands.svg'
 import logoWhite from '../public/logo-white.svg'
+import chartSvg from '../public/chart.svg'
 
 export default () => (
   <Layout>
-    <Head
-      title="amini"
-      meta={[
-        { name: `viewport`, content: `width=device-width, initial-scale=1` },
-      ]}
-    />
     <Center style={{ height: `calc(100vh - 5px)` }}>
       <Col className={heroContainer}>
         <img className={heroHands} src={hands} />
         <img className={heroLogo} src={logoWhite} />
-        <span className={slogan}>Something something something blockchain.</span>
+        <span className={slogan}>Somethiasdasdasng something something blockchain.</span>
       </Col>
     </Center>
     <Col className={card}>
@@ -36,18 +30,12 @@ export default () => (
           </p>
         </Col>
         <Center flex="1">
-          <img className={chart} src="/static/chart.svg" />
+          <img className={chart} src={chartSvg} />
         </Center>
       </Row>
     </Col>
   </Layout>
 )
-
-insertRule(`
-  p {
-    line-height: 25px;
-  }
-`)
 
 let heroContainer = css({
   marginBottom: `200px`,

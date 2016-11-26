@@ -1,5 +1,5 @@
 import React from 'react'
-import { style as css, insertRule } from 'glamor'
+import { style as css } from 'glamor'
 import { Row, Col } from '../uikit/Flex'
 import logoWhite from '../../public/logo-white.svg'
 
@@ -17,17 +17,6 @@ export default ({ children }) => (
     <Col>{children}</Col>
   </Col>
 )
-
-insertRule(`
-  html, body {
-    font-family: 'Droid Sans', sans-serif;
-    height: 100vh;
-    background: linear-gradient(to right, hsl(176, 66%, 32%) 0%, hsl(253, 46%, 44%) 100%);
-  }
-  a {
-    cursor: pointer;
-  }
-`)
 
 let navLogo = css({
   width: `100px`,
