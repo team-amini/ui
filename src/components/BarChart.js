@@ -56,6 +56,10 @@ export default class BarChart extends Component {
       svg.append("g")
         .attr("transform", "translate(0," + (h - yoffset) + ")")
         .call(d3.axisBottom(x));
+
+      // Add the y Axis
+      svg.append("g")
+          .call(d3.axisRight(y));
   }
 
   render() {
