@@ -27,7 +27,7 @@ export default class MapView extends Component {
           0.5: '#ffff00',
           1.0: '#ff0000'
         },
-        weight: 1
+        weight: 2
         //outlineColor: '#000000',
         //outlineWidth: 1
       }).addTo(mymap);
@@ -47,7 +47,7 @@ export default class MapView extends Component {
   render() {
     return (
       <div style={{ marginTop: `50px` }}>
-        <div id="mapview" style={{ height: `500px`, width: `100vw` }} />
+        <div id="mapview" style={{ height: `300px`, width: `100vw` }} />
       </div>
     )
   }

@@ -32,7 +32,6 @@ let App = ({ state, setState }) => {
           <BarChart data={FakeData.fakeValues()} label="chart 3"></BarChart>
         </Col>
       </Center>
-      /*
       <Col className={card}>
         <Row className={cardPadding}>
           <Col flex="1">
@@ -52,7 +51,6 @@ let App = ({ state, setState }) => {
           </Center>
         </Row>
       </Col>
-      */
     </Layout>
   )
 }
@@ -84,7 +82,7 @@ let chart = css({
 })
 
 let cardPadding = css({
-  padding: `50px`,
+  padding: `100px`,
 })
 
 export default enhance(App)
