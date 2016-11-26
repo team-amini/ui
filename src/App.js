@@ -21,6 +21,7 @@ let source = new EventSource(sourceUrl)
 class App extends Component {
   state = {
     loggedIn: false,
+    selectedTransaction: null,
   }
 
   componentDidMount() {
@@ -37,7 +38,7 @@ class App extends Component {
   render() {
     //if (!state.loggedIn) return <Login setState={setState} />
     return (
-      <Layout>
+      <Layout {...this.state}>
         <Col className={heroContainer}>
           <Row>
             <Col flex="1">
@@ -52,7 +53,11 @@ class App extends Component {
               <BarChart data={FakeData.fakeChartValues()} label="Chart 1" />
             </Col>
             <Col flex="1">
-              <ActivityView data={FakeData.fakeValues()} label="chart 2"/>
+              <ActivityView
+                selectedTransaction={this.state.selectedTransaction}
+                selectTransaction={selectedTransaction => this.setState({ selectedTransaction })}
+                data={FakeData.fakeValues()} label="chart 2"
+              />
             </Col>
           </Row>
         </Col>
