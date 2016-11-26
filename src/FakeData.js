@@ -15,7 +15,9 @@ export default class FakeData {
     let r = this.test.map((d)=> {
       return {
         k: d.transactiontime,
-        v: d.amount
+        v: d.amount,
+        from: d.from,
+        to: d.to
       };
     });
 
@@ -544,6 +546,6 @@ export default class FakeData {
   {"action":"transfer","from":658,"to":542,"amount":998.0,"transactiontime":1480141435585,"fromPoint":{"latitude":"43.9297065241008","longitude":"-79.5837225486847"},"toPoint":{"latitude":"45.7686288707564","longitude":"-67.0142105454754"}},
   {"action":"transfer","from":439,"to":103,"amount":512.0,"transactiontime":1480141435582,"fromPoint":{"latitude":"45.1459730820287","longitude":"-80.2317115238004"},"toPoint":{"latitude":"46.0753029485906","longitude":"-63.0603263462704"}},
   {"action":"transfer","from":764,"to":173,"amount":507.0,"transactiontime":1480141435585,"fromPoint":{"latitude":"48.9134222712862","longitude":"-59.0978124561795"},"toPoint":{"latitude":"51.4281078333328","longitude":"-113.975687308529"}},
-  {"action":"transfer","from":826,"to":542,"amount":278.0,"transactiontime":1480141435586,"fromPoint":{"latitude":"45.5967865125645","longitude":"-60.9643986591917"},"toPoint":{"latitude":"45.7686288707564","longitude":"-67.0142105454754"}} ];
+  {"action":"transfer","from":1,"to":542,"amount":278.0,"transactiontime":1480141435586,"fromPoint":{"latitude":"45.5967865125645","longitude":"-60.9643986591917"},"toPoint":{"latitude":"45.7686288707564","longitude":"-67.0142105454754"}} ];
 
 }

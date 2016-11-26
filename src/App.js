@@ -8,6 +8,7 @@ import logoWhite from '../public/logo.png'
 import chartSvg from '../public/chart.svg'
 import BarChart from './components/BarChart'
 import MapView from './components/MapView'
+import ActivityView from './components/ActivityView'
 import FakeData from './FakeData'
 import Login from './Login'
 
@@ -28,8 +29,7 @@ let App = ({ state, setState }) => {
         <Col className={heroContainer}>
           <MapView data={FakeData.fakeGeo()}></MapView>
           <BarChart data={FakeData.fakeValues()} label="chart 1"></BarChart>
-          <BarChart data={FakeData.fakeValues()} label="chart 2"></BarChart>
-          <BarChart data={FakeData.fakeValues()} label="chart 3"></BarChart>
+          <ActivityView data={FakeData.fakeValues()} label="chart 2"/>
         </Col>
       </Center>
       <Col className={card}>

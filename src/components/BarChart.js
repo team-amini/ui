@@ -66,8 +66,8 @@ export default class BarChart extends Component {
     // return (<div>hi</div>)
     return (
       <div>
-        <div ref={node => this.node = node} style={{'width':'800px', 'height':'120px'}}></div>
         <div>{this.props.label}</div>
+        <div ref={node => this.node = node} style={{'width':'800px', 'height':'120px'}}></div>
       </div>
     )
   }
