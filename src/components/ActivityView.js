@@ -75,53 +75,63 @@ export default class ActivityView extends Component {
 
   render() {
 
-    let topSendersByTX = this.state.topSendersByTX.map((d)=> {
-      return <tr key={d.id + '-s1'}><td>{d.id}</td><td style={{textAlign:'right'}}>{d.numTX}</td></tr>
-    });
+    let topSendersByTX = this.state.topSendersByTX.map(d =>
+      <tr key={d.id + '-s1'} onClick={() => this.props.selectTransaction(d)}>
+        <td>{d.id}</td>
+        <td style={{textAlign:'right'}}>{d.numTX}</td>
+      </tr>
+    )
 
-    let topSendersByValue = this.state.topSendersByValue.map((d)=> {
-      return <tr key={d.id + '-s2'}><td>{d.id}</td><td style={{textAlign:'right'}}>{d.totalValue}</td></tr>
-    });
+    let topSendersByValue = this.state.topSendersByValue.map(d =>
+      <tr key={d.id + '-s2'} onClick={() => this.props.selectTransaction(d)}>
+        <td>{d.id}</td>
+        <td style={{textAlign:'right'}}>{d.totalValue}</td>
+      </tr>
+    )
 
-    let topReceiversByTX = this.state.topReceiversByTX.map((d)=> {
-      return <tr key={d.id + '-r1'}><td>{d.id}</td><td style={{textAlign:'right'}}>{d.numTX}</td></tr>
-    });
+    let topReceiversByTX = this.state.topReceiversByTX.map(d =>
+      <tr key={d.id + '-r1'} onClick={() => this.props.selectTransaction(d)}>
+        <td>{d.id}</td>
+        <td style={{textAlign:'right'}}>{d.numTX}</td>
+      </tr>
+    )
 
-    let topReceiversByValue = this.state.topReceiversByValue.map((d)=> {
-      return <tr key={d.id + '-r2'}><td>{d.id}</td><td style={{textAlign:'right'}}>{d.totalValue}</td></tr>
-    });
-
+    let topReceiversByValue = this.state.topReceiversByValue.map(d =>
+      <tr key={d.id + '-r2'} onClick={() => this.props.selectTransaction(d)}>
+        <td>{d.id}</td>
+        <td style={{textAlign:'right'}}>{d.totalValue}</td>
+      </tr>
+    )
 
     return (
       <div style={{display:'flex', 'justifyContent':'center', margin: '5px'}}>
-          <table>
-            <thead>
-              <tr><th>Sender</th><th># TX</th></tr>
-            </thead>
-            <tbody>{topSendersByTX}</tbody>
-          </table>
+        <table>
+          <thead>
+            <tr><th>Sender</th><th># TX</th></tr>
+          </thead>
+          <tbody>{topSendersByTX}</tbody>
+        </table>
 
-          <table>
-            <thead>
-              <tr><th>Sender</th><th>Amt</th></tr>
-            </thead>
-            <tbody>{topSendersByValue}</tbody>
-          </table>
+        <table>
+          <thead>
+            <tr><th>Sender</th><th>Amt</th></tr>
+          </thead>
+          <tbody>{topSendersByValue}</tbody>
+        </table>
 
-          <table>
-            <thead>
-              <tr><th>Receiver</th><th># TX</th></tr>
-            </thead>
-            <tbody>{topReceiversByTX}</tbody>
-          </table>
+        <table>
+          <thead>
+            <tr><th>Receiver</th><th># TX</th></tr>
+          </thead>
+          <tbody>{topReceiversByTX}</tbody>
+        </table>
 
-          <table>
-            <thead>
-              <tr><th>Receiver</th><th>Amt</th></tr>
-            </thead>
-            <tbody>{topReceiversByValue}</tbody>
-          </table>
-
+        <table>
+          <thead>
+            <tr><th>Receiver</th><th>Amt</th></tr>
+          </thead>
+          <tbody>{topReceiversByValue}</tbody>
+        </table>
       </div>
     )
   }

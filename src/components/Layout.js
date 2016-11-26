@@ -3,11 +3,15 @@ import { style as css } from 'glamor'
 import { Row, Col } from '../uikit/Flex'
 import logo from '../../public/logo.png'
 
-export default ({ children }) => (
+export default ({ selectedTransaction, children }) => (
   <Col>
     <Row className={header}>
       <img className={navLogo} src={logo} />
-      <span style={{ marginLeft: `auto` }}> </span>
+      <span style={{ marginLeft: `auto` }}>
+        {selectedTransaction &&
+          <span>FILTERING ON TX ID: {selectedTransaction.id}</span>
+        }
+      </span>
     </Row>
     <Col style={{ marginTop: `80px` }}>{children}</Col>
   </Col>
@@ -29,8 +33,8 @@ let navLink = css({
 let header = css({
   position: `fixed !important`,
   width: `100vw`,
-  lineHeight: `80px`,
-  color: `white`,
+  // lineHeight: `80px`,
+  color: `rgb(0, 0, 0)`,
   padding: `0 50px`,
   zIndex: 100000,
   padding: `20px`,
