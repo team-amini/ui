@@ -5,6 +5,7 @@ export default class MapView extends Component {
   componentDidMount() {
     let token = 'pk.eyJ1IjoibXdkY2hhbmciLCJhIjoiY2lqcDNwazhpMDEzaHVmbHhsdzdkZGF2MiJ9.ZYG2wT80kX2f-PCs7BAE4w';
     let mapId = 'mwdchang.p079gon0';
+    mapId = 'mwdchang.ooog665f';
     let mymap = window.L.map('mapview', {zoomControl: false}).setView([45.505, -90.09], 3);
 
     window.L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {

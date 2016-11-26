@@ -78,24 +78,24 @@ export default class ActivityView extends Component {
     });
 
     let topSendersByTX = this.state.topSendersByTX.map((d)=> {
-      return <tr><td key={d.id + 'tx'}>{d.id}</td><td>({d.numTX})</td></tr>
+      return <tr key={d.id + '-s1'}><td>{d.id}</td><td>({d.numTX})</td></tr>
     });
 
     let topSendersByValue = this.state.topSendersByValue.map((d)=> {
-      return <tr><td key={d.id + 'v'}>{d.id}</td><td>({d.totalValue})</td></tr>
+      return <tr key={d.id + '-s2'}><td>{d.id}</td><td>({d.totalValue})</td></tr>
     });
 
     let topReceiversByTX = this.state.topReceiversByTX.map((d)=> {
-      return <tr><td key={d.id + 'tx'}>{d.id}</td><td>({d.numTX})</td></tr>
+      return <tr key={d.id + '-r1'}><td>{d.id}</td><td>({d.numTX})</td></tr>
     });
 
     let topReceiversByValue = this.state.topReceiversByValue.map((d)=> {
-      return <tr><td key={d.id + 'v'}>{d.id}</td><td>({d.totalValue})</td></tr>
+      return <tr key={d.id + '-r2'}><td>{d.id}</td><td>({d.totalValue})</td></tr>
     });
 
 
     return (
-      <div style={{display:'flex', 'justify-content':'center'}}>
+      <div style={{display:'flex', 'justifyContent':'center'}}>
         <div>
           <div>Top senders by # TX</div>
           <table className={activityTable}><tbody>{topSendersByTX}</tbody></table>
