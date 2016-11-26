@@ -22,6 +22,8 @@ export default class FakeData {
     return _.orderBy(r, (d)=> { return -d.k; });
   }
 
+
+
   static fakeGeo() {
     /*
     let r = [];
@@ -44,7 +46,7 @@ export default class FakeData {
   }
 
   static test = [{"action":"transfer","from":13,"to":558,"amount":313.0,"transactiontime":1480141435443,"fromPoint":{"latitude":"43.3708773145545","longitude":"-79.2556987484524"},"toPoint":{"latitude":"45.4902062639698","longitude":"-82.6975858403205"}},
-  {"action":"transfer","from":14,"to":975,"amount":611.0,"transactiontime":1480141435495,"fromPoint":{"latitude":"49.5487375840442","longitude":"-123.370238941183"},"toPoint":{"latitude":"48.3168230528994","longitude":"-70.9674077747105"}},
+  {"action":"transfer","from":14,"to":975,"amount":611.0,"transactiontime":1480141435443,"fromPoint":{"latitude":"49.5487375840442","longitude":"-123.370238941183"},"toPoint":{"latitude":"48.3168230528994","longitude":"-70.9674077747105"}},
   {"action":"transfer","from":15,"to":474,"amount":346.0,"transactiontime":1480141435495,"fromPoint":{"latitude":"43.6912341648455","longitude":"-79.1000432788801"},"toPoint":{"latitude":"44.5179725010886","longitude":"-63.9997690115468"}},
   {"action":"transfer","from":2,"to":169,"amount":473.0,"transactiontime":1480141435443,"fromPoint":{"latitude":"42.7852155469692","longitude":"-82.4193945498064"},"toPoint":{"latitude":"43.0344439437203","longitude":"-78.9919627025425"}},
   {"action":"transfer","from":4,"to":520,"amount":556.0,"transactiontime":1480141435495,"fromPoint":{"latitude":"44.1792770394819","longitude":"-78.5166361900165"},"toPoint":{"latitude":"42.9427243540002","longitude":"-79.4986287240083"}},

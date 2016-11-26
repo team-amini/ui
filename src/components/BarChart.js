@@ -13,10 +13,11 @@ export default class BarChart extends Component {
     let xFn = (d)=>{ return d.k; };
     let yFn = (d)=>{ return d.v; };
 
+    let yoffset = 20;
     let xExtent = d3.extent( data.map(xFn) );
     let yExtent = d3.extent( data.map(yFn) );
     let x = d3.scaleTime().domain(xExtent).range([1, w-1]);
-    let y = d3.scaleLinear().domain(yExtent).range([h-1, 1]);
+    let y = d3.scaleLinear().domain(yExtent).range([h-yoffset, 1]);
 
     let path = d3.line()
       .x((d)=>x(xFn(d)))
@@ -36,8 +37,8 @@ export default class BarChart extends Component {
       .style('stroke', '#BBB')
       .style('fill', 'none');
 
+    /*
     let barWidth = w / data.length;
-
     g.selectAll('.bars')
       .data(data)
       .enter()
@@ -45,10 +46,16 @@ export default class BarChart extends Component {
       .classed('bars', true)
       .attr('x', (d)=>x(xFn(d)))
       .attr('y', (d)=>y(yFn(d) * 0.5))
-      .attr('height', (d, i)=> { return h - y(yFn(d));})
+      .attr('height', (d, i)=> { return h - yoffset - y(yFn(d));})
       .attr('width', barWidth)
-      .style('fill', '#333')
+      .style('fill', '#063')
       .style('fill-opacity', 0.3);
+      */
+
+      // Add the x Axis
+      svg.append("g")
+        .attr("transform", "translate(0," + (h - yoffset) + ")")
+        .call(d3.axisBottom(x));
   }
 
   render() {
