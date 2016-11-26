@@ -55,7 +55,7 @@ class App extends Component {
         <Col>
           <Row>
             <Col flex="1">
-              <MapView data={FakeData.fakeGeo()} />
+              <MapView data={FakeData.fakeGeo({ amountRange: this.state.amountRange })} />
             </Col>
             <Col flex="1" style={{ justifyContent: `center`, alignItems: `center` }}>
               <News data={FakeData.fakeNews({ amountRange: this.state.amountRange })} />

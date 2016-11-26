@@ -19,16 +19,14 @@ export default class FakeData {
     }))
 
     let r2 = _.groupBy(r, d => d.k)
-    let r3 = []
-
     let keys = Object.keys(r2)
-    keys.forEach(key => {
-      r3.push({
-        k: key,
-        v: _.sum(r2[key].map(d => d.v)),
-        numTrans: r2[key].length
-      })
-    })
+
+    let r3 = keys.map(key => ({
+      k: key,
+      v: _.sum(r2[key].map(d => d.v)),
+      numTrans: r2[key].length,
+    }))
+
     return _.orderBy(r3, d => d.k)
   }
 
@@ -44,9 +42,7 @@ export default class FakeData {
     return _.orderBy(r, d => d.k)
   }
 
-
-
-  static fakeGeo() {
+  static fakeGeo({ amountRange }) {
     /*
     let r = []
     for (let i=0 i < this.num i++) {
@@ -54,17 +50,16 @@ export default class FakeData {
     }
     return r
     */
-    return data.map((d)=> {
-      return {
-        lat: d.fromPoint.latitude,
-        lng: d.fromPoint.longitude,
+    return data.filter(d => d.amount > amountRange.min && d.amount < amountRange.max)
+    .map(d => ({
+      lat: d.fromPoint.latitude,
+      lng: d.fromPoint.longitude,
 
-        f_lat: d.fromPoint.latitude,
-        f_lng: d.fromPoint.longitude,
-        t_lat: d.toPoint.latitude,
-        t_lng: d.toPoint.longitude
-      }
-    })
+      f_lat: d.fromPoint.latitude,
+      f_lng: d.fromPoint.longitude,
+      t_lat: d.toPoint.latitude,
+      t_lng: d.toPoint.longitude,
+    }))
   }
 
 }

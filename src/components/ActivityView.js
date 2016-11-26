@@ -46,28 +46,28 @@ export default ({ data, selectTransaction }) => {
   } = transformData(data)
 
   let topSendersByTX = a.map(d =>
-    <tr key={d.id + '-s1'} onClick={() => selectTransaction(d)}>
+    <tr key={d.id + `-s1`} onClick={() => selectTransaction(d)}>
       <td>{d.id}</td>
-      <td style={{textAlign:'right'}}>{d.numTX}</td>
+      <td style={{textAlign: `right`}}>{d.numTX}</td>
     </tr>
   )
 
   let topSendersByValue = b.map(d =>
-    <tr key={d.id + '-s2'} onClick={() => selectTransaction(d)}>
+    <tr key={d.id + `-s2`} onClick={() => selectTransaction(d)}>
       <td>{d.id}</td>
-      <td style={{textAlign:'right'}}>{d.totalValue}</td>
+      <td style={{textAlign: `right`}}>{d.totalValue}</td>
     </tr>
   )
 
   let topReceiversByTX = c.map(d =>
-    <tr key={d.id + '-r1'} onClick={() => selectTransaction(d)}>
+    <tr key={d.id + `-r1`} onClick={() => selectTransaction(d)}>
       <td>{d.id}</td>
-      <td style={{textAlign:'right'}}>{d.numTX}</td>
+      <td style={{textAlign: `right`}}>{d.numTX}</td>
     </tr>
   )
 
   let topReceiversByValue = d.map(d =>
-    <tr key={d.id + '-r2'} onClick={() => selectTransaction(d)}>
+    <tr key={d.id + `-r2`} onClick={() => selectTransaction(d)}>
       <td>{d.id}</td>
       <td style={{ textAlign: `right` }}>{d.totalValue}</td>
     </tr>
@@ -78,7 +78,7 @@ export default ({ data, selectTransaction }) => {
       <div style={{ color: `silver`, padding: `12px`, fontWeight: 100 }}>
         Most Active Clients
       </div>
-      <div style={{display:'flex', 'justifyContent':'center', margin: '5px'}}>
+      <div style={{ display: `flex`, justifyContent: `center`, margin: `5px` }}>
         <table>
           <thead>
             <tr><th>Top Senders</th><th># TX</th></tr>
