@@ -36,7 +36,7 @@ let header = css({
   width: `calc(100vw - 100px)`,
   lineHeight: `80px`,
   color: `white`,
-  margin: `0 50px`,
+  padding: `0 50px`,
   zIndex: 100000,
   padding: `20px`,
   backgroundColor: `white`,
