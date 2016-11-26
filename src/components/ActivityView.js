@@ -4,9 +4,17 @@ import * as d3 from 'd3'
 
 export default class ActivityView extends Component {
 
+  constructor() {
+    super();
+    this.state = {
+      topSendersByTX:[],
+      topSendersByValue:[]
+    }
+  }
+
   componentDidMount() {
     let data = this.props.data;
-    let element = d3.select(this.node);
+    // let element = d3.select(this.node);
 
     /*
     let w = parseFloat(element.style('width'));
@@ -35,21 +43,47 @@ export default class ActivityView extends Component {
     });
 
     let topSendersByTX = _.take(senders.sort((d)=> { -d.numTX }), 5);
+    /*
     topSendersByTX.forEach((sender)=> {
       element.append('div').text('sender: ' + sender.sender + ' transactions:' + sender.numTX);
     });
+    */
+
 
     let topSendersByValue = _.take(senders.sort((d)=> { -d.totalValue}), 5);
+    /*
     topSendersByValue.forEach((sender)=> {
       element.append('div').text('sender: ' + sender.sender + ' total value:' + sender.totalValue);
+    });
+    */
+
+    this.setState({
+      topSendersByTX: topSendersByTX,
+      topSendersByValue: topSendersByValue
     });
   }
 
   render() {
+
+    let topSendersByTX = this.state.topSendersByTX.map((d)=> {
+      return <li key={d.sender}>{d.sender}  <em>({d.numTX})</em></li>
+    });
+
+    let topSendersByValue = this.state.topSendersByValue.map((d)=> {
+      return <li key={d.sender}>{d.sender} <em>({d.totalValue})</em></li>
+    });
+
     return (
       <div>
-        <div>Activity</div>
-        <div ref={node => this.node = node}></div>
+        <span>
+          <span>Top senders by # TX</span>
+          <ul> {topSendersByTX} </ul>
+        </span>
+
+        <span>
+          <span>Top senders by value</span>
+          <ul> {topSendersByValue} </ul>
+        </span>
       </div>
     )
   }
