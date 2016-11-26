@@ -33,7 +33,7 @@ export default class BarChart extends Component {
     g.append('path')
       .datum(data)
       .attr('d', path)
-      .style('stroke', '#EEE')
+      .style('stroke', '#BBB')
       .style('fill', 'none');
 
     let barWidth = w / data.length;
@@ -47,7 +47,7 @@ export default class BarChart extends Component {
       .attr('y', (d)=>y(yFn(d) * 0.5))
       .attr('height', (d, i)=> { return h - y(yFn(d));})
       .attr('width', barWidth)
-      .style('fill', '#CFF')
+      .style('fill', '#333')
       .style('fill-opacity', 0.3);
   }
 
