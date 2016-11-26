@@ -96,7 +96,7 @@ export default class ActivityView extends Component {
 
 
     return (
-      <div style={{display:'flex', 'justifyContent':'center'}}>
+      <div style={{display:'flex', 'justifyContent':'center', margin: '5px'}}>
         <div>
           <div>Top senders by # TX</div>
           <table className={activityTable}>

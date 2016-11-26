@@ -65,9 +65,9 @@ export default class BarChart extends Component {
   render() {
     // return (<div>hi</div>)
     return (
-      <div>
+      <div style={{margin: '5px'}}>
         <div>{this.props.label}</div>
-        <div ref={node => this.node = node} style={{'width':'800px', 'height':'120px'}}></div>
+        <div ref={node => this.node = node} style={{'width':'600px', 'height':'300px'}}></div>
       </div>
     )
   }

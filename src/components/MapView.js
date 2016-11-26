@@ -42,7 +42,6 @@ export default class MapView extends Component {
         return [p.x, p.y, i];
       });
 
-
       window.L.hotline(pointsPrime, {
       //window.L.hotline([[+d.f_lat, +d.f_lng, 10], [+d.t_lat, +d.t_lng, 20]], {
       //window.L.hotline([[0, 0, 10], [40, 40, 15], [70, 70, 20]], {
@@ -57,15 +56,15 @@ export default class MapView extends Component {
         //outlineColor: '#000000',
         //outlineWidth: 1
       }).addTo(mymap);
-
     });
 
   }
 
   render() {
     return (
-      <div style={{ marginTop: `50px` }}>
-        <div id="mapview" style={{ height: `350px`, width: `100vw` }} />
+      <div style={{margin: '5px'}}>
+        <div>Map</div>
+        <div id="mapview" style={{ height: `300px`, width: `550px` }} />
       </div>
     )
   }

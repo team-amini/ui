@@ -21,15 +21,18 @@ let enhance = withState(
 )
 
 let App = ({ state, setState }) => {
-  if (!state.loggedIn) return <Login setState={setState} />
-
+  //if (!state.loggedIn) return <Login setState={setState} />
   return (
     <Layout>
-      <Center style={{ height: `calc(100vh - 5px)` }}>
+      <Center>
         <Col className={heroContainer}>
-          <MapView data={FakeData.fakeGeo()}></MapView>
-          <BarChart data={FakeData.fakeChartValues()} label="chart 1"></BarChart>
-          <ActivityView data={FakeData.fakeValues()} label="chart 2"/>
+          <div style={{display: 'flex', justifyContent:'space-around'}}>
+            <MapView data={FakeData.fakeGeo()}></MapView>
+            <ActivityView data={FakeData.fakeValues()} label="chart 2"/>
+          </div>
+          <div style={{display: 'flex', justifyContent:'space-around'}}>
+            <BarChart data={FakeData.fakeChartValues()} label="Chart 1"></BarChart>
+          </div>
         </Col>
       </Center>
       <Col className={card}>

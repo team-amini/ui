@@ -7,14 +7,9 @@ export default ({ children }) => (
   <Col>
     <Row className={header}>
       <img className={navLogo} src={logo} />
-      <span style={{ marginLeft: `auto` }}>
-        <Row className={hideSmall} spacing="25px">
-          {/* <span><Link to="/about"><a className={navLink}>ABOUT</a></Link></span> */}
-          {/* <span><Link to="/contact"><a className={navLink}>CONTACT</a></Link></span> */}
-        </Row>
-      </span>
+      <span style={{ marginLeft: `auto` }}> </span>
     </Row>
-    <Col style={{ marginTop: `100px` }}>{children}</Col>
+    <Col style={{ marginTop: `80px` }}>{children}</Col>
   </Col>
 )
 
