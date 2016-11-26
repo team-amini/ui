@@ -29,28 +29,25 @@ class App extends Component {
   }
 
   render() {
-  //if (!state.loggedIn) return <Login setState={setState} />
-    if (this.mapContainer) {
-      console.log(this.mapContainer.clientHeight)
-      console.log(this.mapContainer.clientWidth)
-    }
-
+    //if (!state.loggedIn) return <Login setState={setState} />
     return (
       <Layout>
         <Col className={heroContainer}>
           <Row>
-            <Col flex="1" ref={node => this.mapContainer = node}>
-              {this.state.mapContainer &&
-                <MapView data={FakeData.fakeGeo()} />
-              }
+            <Col flex="1">
+              <MapView data={FakeData.fakeGeo()} />
             </Col>
             <Col flex="1">
               <News />
             </Col>
           </Row>
           <Row>
-            <BarChart data={FakeData.fakeChartValues()} label="Chart 1" />
-            <ActivityView data={FakeData.fakeValues()} label="chart 2"/>
+            <Col flex="1" style={{ padding: `10px` }}>
+              <BarChart data={FakeData.fakeChartValues()} label="Chart 1" />
+            </Col>
+            <Col flex="1">
+              <ActivityView data={FakeData.fakeValues()} label="chart 2"/>
+            </Col>
           </Row>
         </Col>
       </Layout>
