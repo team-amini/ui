@@ -57,11 +57,13 @@ export default class ActivityView extends Component {
     });
 
 
-    let topSendersByTX = _.take(senders.sort((d)=> { -d.numTX }), 5);
-    let topSendersByValue = _.take(senders.sort((d)=> { -d.totalValue}), 5);
+    let num = 10;
 
-    let topReceiversByTX = _.take(receivers.sort((d)=> { -d.numTX }), 5);
-    let topReceiversByValue = _.take(receivers.sort((d)=> { -d.totalValue}), 5);
+    let topSendersByTX = _.take(senders.sort((d)=> { -d.numTX }), num);
+    let topSendersByValue = _.take(senders.sort((d)=> { -d.totalValue}), num);
+
+    let topReceiversByTX = _.take(receivers.sort((d)=> { -d.numTX }), num);
+    let topReceiversByValue = _.take(receivers.sort((d)=> { -d.totalValue}), num);
 
     this.setState({
       topSendersByTX: topSendersByTX,
@@ -73,65 +75,52 @@ export default class ActivityView extends Component {
 
   render() {
 
-    let activityTable = css({
-      border: '1px solid #999',
-      background: '#EEE'
-    });
-
     let topSendersByTX = this.state.topSendersByTX.map((d)=> {
-      return <tr key={d.id + '-s1'}><td>{d.id}</td><td>({d.numTX})</td></tr>
+      return <tr key={d.id + '-s1'}><td>{d.id}</td><td style={{textAlign:'right'}}>{d.numTX}</td></tr>
     });
 
     let topSendersByValue = this.state.topSendersByValue.map((d)=> {
-      return <tr key={d.id + '-s2'}><td>{d.id}</td><td>({d.totalValue})</td></tr>
+      return <tr key={d.id + '-s2'}><td>{d.id}</td><td style={{textAlign:'right'}}>{d.totalValue}</td></tr>
     });
 
     let topReceiversByTX = this.state.topReceiversByTX.map((d)=> {
-      return <tr key={d.id + '-r1'}><td>{d.id}</td><td>({d.numTX})</td></tr>
+      return <tr key={d.id + '-r1'}><td>{d.id}</td><td style={{textAlign:'right'}}>{d.numTX}</td></tr>
     });
 
     let topReceiversByValue = this.state.topReceiversByValue.map((d)=> {
-      return <tr key={d.id + '-r2'}><td>{d.id}</td><td>({d.totalValue})</td></tr>
+      return <tr key={d.id + '-r2'}><td>{d.id}</td><td style={{textAlign:'right'}}>{d.totalValue}</td></tr>
     });
 
 
     return (
       <div style={{display:'flex', 'justifyContent':'center', margin: '5px'}}>
-        <div>
-          <table className={activityTable}>
+          <table>
             <thead>
               <tr><th>Sender</th><th># TX</th></tr>
             </thead>
             <tbody>{topSendersByTX}</tbody>
           </table>
-        </div>
 
-        <div>
-          <table className={activityTable}>
+          <table>
             <thead>
               <tr><th>Sender</th><th>Amt</th></tr>
             </thead>
             <tbody>{topSendersByValue}</tbody>
           </table>
-        </div>
 
-        <div>
-          <table className={activityTable}>
+          <table>
             <thead>
               <tr><th>Receiver</th><th># TX</th></tr>
             </thead>
             <tbody>{topReceiversByTX}</tbody>
           </table>
-        </div>
 
-        <div>
-          <table className={activityTable}>
+          <table>
             <thead>
               <tr><th>Receiver</th><th>Amt</th></tr>
             </thead>
             <tbody>{topReceiversByValue}</tbody>
           </table>
-        </div>
 
       </div>
     )
