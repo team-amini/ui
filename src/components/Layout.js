@@ -33,7 +33,7 @@ let navLink = css({
 
 let header = css({
   position: `fixed !important`,
-  width: `calc(100vw - 100px)`,
+  width: `100vw`,
   lineHeight: `80px`,
   color: `white`,
   padding: `0 50px`,

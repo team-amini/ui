@@ -82,7 +82,7 @@ let chart = css({
 })
 
 let cardPadding = css({
-  padding: `100px`,
+  padding: `50px`,
 })
 
 export default enhance(App)
