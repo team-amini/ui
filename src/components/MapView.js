@@ -16,6 +16,16 @@ export default class MapView extends Component {
 
     let data = this.props.data;
 
+    data.forEach((d)=> {
+        var circle = window.L.circle([d.lat, d.lng], {
+        // color: '#F00',
+        stroke: false,
+        fillColor: '#F03',
+        fillOpacity: 0.3,
+        radius: 5000
+      }).addTo(mymap);
+    });
+
 
     data.forEach((d)=> {
       window.L.hotline([[+d.f_lat, +d.f_lng, 10], [+d.t_lat, +d.t_lng, 20]], {
@@ -23,7 +33,7 @@ export default class MapView extends Component {
         min: 10,
         max: 20,
         palette: {
-          0.0: '#008800',
+          0.0: '#00CC00',
           0.5: '#ffff00',
           1.0: '#ff0000'
         },
@@ -32,14 +42,6 @@ export default class MapView extends Component {
         //outlineWidth: 1
       }).addTo(mymap);
 
-      /*
-      var circle = window.L.circle([d.lat, d.lng], {
-        color: 'red',
-        fillColor: '#f03',
-        fillOpacity: 0.5,
-        radius: 50000
-      }).addTo(mymap);
-      */
     });
 
   }

@@ -9,7 +9,9 @@ export default class ActivityView extends Component {
     super();
     this.state = {
       topSendersByTX:[],
-      topSendersByValue:[]
+      topSendersByValue:[],
+      topReceiversByTX: [],
+      topReceiversByValue: []
     }
   }
 
@@ -31,36 +33,41 @@ export default class ActivityView extends Component {
     */
 
     // Eh...too tired to optimize this crap
-    let agg =  _.groupBy(data, (d)=>{return d.from});
+    let agg = _.groupBy(data, (d)=>{return d.from});
     let keys = Object.keys(agg);
-
     let senders = [];
+    let receivers = [];
+
     keys.forEach((key) => {
       senders.push({
-        sender: key,
+        id: key,
         numTX: agg[key].length,
         totalValue: _.sum(agg[key].map(d=>d.v))
       });
     });
 
+    agg = _.groupBy(data, (d)=>{return d.to});
+    keys = Object.keys(agg);
+    keys.forEach((key) => {
+      receivers.push({
+        id: key,
+        numTX: agg[key].length,
+        totalValue: _.sum(agg[key].map(d=>d.v))
+      });
+    });
+
+
     let topSendersByTX = _.take(senders.sort((d)=> { -d.numTX }), 5);
-    /*
-    topSendersByTX.forEach((sender)=> {
-      element.append('div').text('sender: ' + sender.sender + ' transactions:' + sender.numTX);
-    });
-    */
-
-
     let topSendersByValue = _.take(senders.sort((d)=> { -d.totalValue}), 5);
-    /*
-    topSendersByValue.forEach((sender)=> {
-      element.append('div').text('sender: ' + sender.sender + ' total value:' + sender.totalValue);
-    });
-    */
+
+    let topReceiversByTX = _.take(receivers.sort((d)=> { -d.numTX }), 5);
+    let topReceiversByValue = _.take(receivers.sort((d)=> { -d.totalValue}), 5);
 
     this.setState({
       topSendersByTX: topSendersByTX,
-      topSendersByValue: topSendersByValue
+      topSendersByValue: topSendersByValue,
+      topReceiversByTX: topReceiversByTX,
+      topReceiversByValue: topReceiversByValue
     });
   }
 
@@ -71,12 +78,21 @@ export default class ActivityView extends Component {
     });
 
     let topSendersByTX = this.state.topSendersByTX.map((d)=> {
-      return <tr><td key={d.sender + 'tx'}>{d.sender}</td><td>({d.numTX})</td></tr>
+      return <tr><td key={d.id + 'tx'}>{d.id}</td><td>({d.numTX})</td></tr>
     });
 
     let topSendersByValue = this.state.topSendersByValue.map((d)=> {
-      return <tr><td key={d.sender + 'v'}>{d.sender}</td><td>({d.totalValue})</td></tr>
+      return <tr><td key={d.id + 'v'}>{d.id}</td><td>({d.totalValue})</td></tr>
     });
+
+    let topReceiversByTX = this.state.topReceiversByTX.map((d)=> {
+      return <tr><td key={d.id + 'tx'}>{d.id}</td><td>({d.numTX})</td></tr>
+    });
+
+    let topReceiversByValue = this.state.topReceiversByValue.map((d)=> {
+      return <tr><td key={d.id + 'v'}>{d.id}</td><td>({d.totalValue})</td></tr>
+    });
+
 
     return (
       <div style={{display:'flex', 'justify-content':'center'}}>
@@ -89,6 +105,17 @@ export default class ActivityView extends Component {
           <div>Top senders by value</div>
           <table className={activityTable}><tbody>{topSendersByValue}</tbody></table>
         </div>
+
+        <div>
+          <div>Top receivers by # TX</div>
+          <table className={activityTable}><tbody>{topReceiversByTX}</tbody></table>
+        </div>
+
+        <div>
+          <div>Top receivers by value</div>
+          <table className={activityTable}><tbody>{topReceiversByValue}</tbody></table>
+        </div>
+
       </div>
     )
   }
