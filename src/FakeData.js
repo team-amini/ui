@@ -4,14 +4,8 @@ export default class FakeData {
 
   static num = 50;
 
-  static fakeValues() {
-    /*
-    let r = [];
-    for (let i=0; i < this.num; i++) {
-      r.push({k:i, v: Math.random()});
-    }
-    return r;
-    */
+
+  static fakeChartValues() {
     let r = this.test.map((d)=> {
       return {
         k: d.transactiontime,
@@ -21,7 +15,30 @@ export default class FakeData {
       };
     });
 
-    return _.orderBy(r, (d)=> { return -d.k; });
+    let r2 = _.groupBy(r, (d)=>d.k);
+    let r3 = [];
+
+    let keys = Object.keys(r2);
+    keys.forEach((key)=> {
+      r3.push({
+        k: key,
+        v: _.sum(r2[key].map((d)=>d.v))
+      });
+    });
+    return _.orderBy(r3, (d)=> { return d.k; });
+  }
+
+  static fakeValues() {
+    let r = this.test.map((d)=> {
+      return {
+        k: d.transactiontime,
+        v: d.amount,
+        from: d.from,
+        to: d.to
+      };
+    });
+
+    return _.orderBy(r, (d)=> { return d.k; });
   }
 
 

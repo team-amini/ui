@@ -74,7 +74,8 @@ export default class ActivityView extends Component {
   render() {
 
     let activityTable = css({
-      border: '1px solid #999'
+      border: '1px solid #999',
+      background: '#EEE'
     });
 
     let topSendersByTX = this.state.topSendersByTX.map((d)=> {
@@ -98,22 +99,42 @@ export default class ActivityView extends Component {
       <div style={{display:'flex', 'justifyContent':'center'}}>
         <div>
           <div>Top senders by # TX</div>
-          <table className={activityTable}><tbody>{topSendersByTX}</tbody></table>
+          <table className={activityTable}>
+            <thead>
+              <tr><th>Sender</th><th># TX</th></tr>
+            </thead>
+            <tbody>{topSendersByTX}</tbody>
+          </table>
         </div>
 
         <div>
           <div>Top senders by value</div>
-          <table className={activityTable}><tbody>{topSendersByValue}</tbody></table>
+          <table className={activityTable}>
+            <thead>
+              <tr><th>Sender</th><th>Amt</th></tr>
+            </thead>
+            <tbody>{topSendersByValue}</tbody>
+          </table>
         </div>
 
         <div>
           <div>Top receivers by # TX</div>
-          <table className={activityTable}><tbody>{topReceiversByTX}</tbody></table>
+          <table className={activityTable}>
+            <thead>
+              <tr><th>Receiver</th><th># TX</th></tr>
+            </thead>
+            <tbody>{topReceiversByTX}</tbody>
+          </table>
         </div>
 
         <div>
           <div>Top receivers by value</div>
-          <table className={activityTable}><tbody>{topReceiversByValue}</tbody></table>
+          <table className={activityTable}>
+            <thead>
+              <tr><th>Receiver</th><th>Amt</th></tr>
+            </thead>
+            <tbody>{topReceiversByValue}</tbody>
+          </table>
         </div>
 
       </div>

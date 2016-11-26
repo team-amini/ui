@@ -28,7 +28,7 @@ let App = ({ state, setState }) => {
       <Center style={{ height: `calc(100vh - 5px)` }}>
         <Col className={heroContainer}>
           <MapView data={FakeData.fakeGeo()}></MapView>
-          <BarChart data={FakeData.fakeValues()} label="chart 1"></BarChart>
+          <BarChart data={FakeData.fakeChartValues()} label="chart 1"></BarChart>
           <ActivityView data={FakeData.fakeValues()} label="chart 2"/>
         </Col>
       </Center>
