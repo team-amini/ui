@@ -14,7 +14,7 @@ export default ({ children }) => (
         </Row>
       </span>
     </Row>
-    <Col>{children}</Col>
+    <Col style={{ marginTop: `100px` }}>{children}</Col>
   </Col>
 )
 
@@ -37,7 +37,9 @@ let header = css({
   lineHeight: `80px`,
   color: `white`,
   margin: `0 50px`,
-  zIndex: 10,
+  zIndex: 100000,
+  padding: `20px`,
+  backgroundColor: `white`,
 })
 
 let hideSmall = css({
