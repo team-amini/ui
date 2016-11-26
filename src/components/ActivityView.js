@@ -1,5 +1,6 @@
 import _ from 'lodash'
 import React, { Component } from 'react'
+import { style as css } from 'glamor'
 import * as d3 from 'd3'
 
 export default class ActivityView extends Component {
@@ -65,25 +66,29 @@ export default class ActivityView extends Component {
 
   render() {
 
+    let activityTable = css({
+      border: '1px solid #999'
+    });
+
     let topSendersByTX = this.state.topSendersByTX.map((d)=> {
-      return <li key={d.sender}>{d.sender}  <em>({d.numTX})</em></li>
+      return <tr><td key={d.sender + 'tx'}>{d.sender}</td><td>({d.numTX})</td></tr>
     });
 
     let topSendersByValue = this.state.topSendersByValue.map((d)=> {
-      return <li key={d.sender}>{d.sender} <em>({d.totalValue})</em></li>
+      return <tr><td key={d.sender + 'v'}>{d.sender}</td><td>({d.totalValue})</td></tr>
     });
 
     return (
-      <div>
-        <span>
-          <span>Top senders by # TX</span>
-          <ul> {topSendersByTX} </ul>
-        </span>
+      <div style={{display:'flex', 'justify-content':'center'}}>
+        <div>
+          <div>Top senders by # TX</div>
+          <table className={activityTable}><tbody>{topSendersByTX}</tbody></table>
+        </div>
 
-        <span>
-          <span>Top senders by value</span>
-          <ul> {topSendersByValue} </ul>
-        </span>
+        <div>
+          <div>Top senders by value</div>
+          <table className={activityTable}><tbody>{topSendersByValue}</tbody></table>
+        </div>
       </div>
     )
   }
