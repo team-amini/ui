@@ -26,27 +26,30 @@ class App extends Component {
       min: 2,
       max: 10,
     },
+    amountRange: {
+      min: 0,
+      max: 1000,
+    },
   }
 
   componentDidMount() {
-    this.api = new API();
+    this.api = new API()
+
     source.onmessage = e => {
       console.log(JSON.parse(e.data))
     }
 
-    this.api.getHistory(1, 2).then((d)=> {
-      console.log('API history', d);
-    });
+    this.api.getHistory(1, 2).then(d => {
+      console.log(`API history`, d)
+    })
   }
 
   render() {
     //if (!state.loggedIn) return <Login setState={setState} />
     return (
       <Layout
-        handleRangeChange={(component, timeRange) => {
-          console.log(123, timeRange)
-          this.setState({ timeRange })
-        }}
+        handleAmountChange={(component, amountRange) => this.setState({ amountRange })}
+        handleRangeChange={(component, timeRange) => this.setState({ timeRange })}
         {...this.state}
       >
         <Col>
@@ -54,13 +57,13 @@ class App extends Component {
             <Col flex="1">
               <MapView data={FakeData.fakeGeo()} />
             </Col>
-            <Col flex="1">
-              <News data={FakeData.fakeNews()} />
+            <Col flex="1" style={{ justifyContent: `center`, alignItems: `center` }}>
+              <News data={FakeData.fakeNews({ amountRange: this.state.amountRange })} />
             </Col>
           </Row>
           <Row>
             <Col flex="1" style={{ padding: `10px` }}>
-              <BarChart data={FakeData.fakeChartValues()}/>
+              <BarChart data={FakeData.fakeChartValues({ amountRange: this.state.amountRange })}/>
             </Col>
             <Col flex="1">
               <ActivityView

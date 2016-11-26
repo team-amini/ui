@@ -106,7 +106,7 @@ export default class ActivityView extends Component {
     return (
       <div style={{ padding: `10px` }}>
         <div style={{ color: `silver`, padding: `12px`, fontWeight: 100 }}>
-          Latest Activity
+          Most Active Clients
         </div>
         <div style={{display:'flex', 'justifyContent':'center', margin: '5px'}}>
           <table>

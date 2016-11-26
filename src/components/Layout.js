@@ -2,9 +2,16 @@ import React from 'react'
 import { style as css } from 'glamor'
 import { Row, Col } from '../uikit/Flex'
 import logo from '../../public/logo.png'
-import InputRange from 'react-input-range'
+import Sidebar from './Sidebar'
 
-export default ({ selectedTransaction, timeRange, handleRangeChange, children }) => (
+export default ({
+  selectedTransaction,
+  timeRange,
+  amountRange,
+  handleAmountChange,
+  handleRangeChange,
+  children,
+}) => (
   <Col>
     <Row className={header}>
       <img className={navLogo} src={logo} />
@@ -16,15 +23,12 @@ export default ({ selectedTransaction, timeRange, handleRangeChange, children })
     </Row>
     <Row style={{ marginTop: `80px` }}>
       <Col className={sidebar}>
-        <Col style={{ padding: `20px`, marginTop: `20px` }}>
-          <div style={{ color: `white`, paddingBottom: `30px` }}>Date Range</div>
-          <InputRange
-            maxValue={20}
-            minValue={0}
-            value={timeRange}
-            onChange={handleRangeChange}
-          />
-        </Col>
+        <Sidebar
+          timeRange={timeRange}
+          handleRangeChange={handleRangeChange}
+          amountRange={amountRange}
+          handleAmountChange={handleAmountChange}
+        />
       </Col>
       <Col flex="1">{children}</Col>
     </Row>

@@ -1,43 +1,36 @@
-import _ from 'lodash'
-import React, { Component } from 'react'
-import { style as css } from 'glamor'
-import * as d3 from 'd3'
+import React from 'react'
 
-export default class News extends Component {
-
-  constructor() {
-    super();
-    this.state = {
-      news: []
-    };
-  }
-
-
-  componentDidMount() {
-    //let data = this.props.data;
-
-    this.setState({
-      news: this.props.data
-    });
-  }
-
-  render() {
-
-    let news = [];
-    this.state.news.forEach((n, i)=> {
-      let x = new Date(n.transactiontime);
-      news.push(<tr key={i}><td>{x.toLocaleString()}</td><td>{n.action}</td><td>{n.from}</td><td>{n.to}</td><td style={{textAlign:'right'}}>{n.amount}</td></tr>)
-    });
-
-    return (
-      <div>
-         <table>
-         <thead>
-            <tr><th>Transaction Time</th><th>Action</th><th>Sender</th><th>Receiver</th><th>Amount</th></tr>
-         </thead>
-         <tbody>{news}</tbody>
-         </table>
+export default ({ data }) => {
+  return (
+    <div style={{ width: `100%`, padding: `20px` }}>
+      <div style={{ color: `silver`, padding: `12px`, fontWeight: 100 }}>
+        Latest Transacions
       </div>
-    )
-  }
+      <table style={{ width: `100%` }}>
+        <thead>
+          <tr>
+            <th>Transaction Time</th>
+            <th>Action</th>
+            <th>Sender</th>
+            <th>Receiver</th>
+            <th>Amount</th>
+          </tr>
+        </thead>
+        <tbody>
+          {data.map((n, i) => {
+            let x = new Date(n.transactiontime)
+            return (
+              <tr key={i}>
+                <td>{x.toLocaleString()}</td>
+                <td>{n.action}</td>
+                <td>{n.from}</td>
+                <td>{n.to}</td>
+                <td style={{ textAlign: `right` }}>{n.amount}</td>
+              </tr>
+            )}
+          )}
+        </tbody>
+      </table>
+    </div>
+  )
 }
