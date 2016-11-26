@@ -13,6 +13,8 @@ export default class BarChart extends Component {
       let data = this.props.data;
       let element = d3.select(this.chartNode);
 
+      console.log(data.length, '!!!!!!!!!!!');
+
       let w = parseFloat(element.style('width'));
       let h = parseFloat(element.style('height'));
 
@@ -40,23 +42,27 @@ export default class BarChart extends Component {
       g.append('path')
         .datum(data)
         .attr('d', path)
-        .style('stroke', '#BBB')
+        .style('stroke', '#4BB')
+        .style('stroke-width', 2)
         .style('fill', 'none');
 
-      /*
+
       let barWidth = w / data.length;
+      let yFn2 = (d)=>{ return d.numTrans; };
+      let yExtent2 = d3.extent( data.map(yFn2) );
+      let y2 = d3.scaleLinear().domain(yExtent2).range([h-yoffset, h*0.7]);
+
       g.selectAll('.bars')
         .data(data)
         .enter()
         .append('rect')
         .classed('bars', true)
         .attr('x', (d)=>x(xFn(d)))
-        .attr('y', (d)=>y(yFn(d) * 0.5))
-        .attr('height', (d, i)=> { return h - yoffset - y(yFn(d));})
-        .attr('width', barWidth)
-        .style('fill', '#063')
-        .style('fill-opacity', 0.3);
-        */
+        .attr('y', (d)=>y2(yFn2(d)))
+        .attr('height', (d, i)=> { return h - y2(yFn2(d)) - yoffset;})
+        .attr('width', 2)
+        .style('fill', '#888')
+        .style('fill-opacity', 0.6);
 
         // Add the x Axis
         svg.append("g")

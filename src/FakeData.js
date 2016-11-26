@@ -25,7 +25,8 @@ export default class FakeData {
     keys.forEach((key)=> {
       r3.push({
         k: key,
-        v: _.sum(r2[key].map((d)=>d.v))
+        v: _.sum(r2[key].map((d)=>d.v)),
+        numTrans: r2[key].length
       });
     });
     return _.orderBy(r3, (d)=> { return d.k; });
