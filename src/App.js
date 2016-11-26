@@ -6,6 +6,7 @@ import hands from '../public/hands.svg'
 import logoWhite from '../public/logo-white.svg'
 import chartSvg from '../public/chart.svg'
 import BarChart from './components/BarChart'
+import FakeData from './FakeData'
 
 export default () => (
   <Layout>
@@ -14,7 +15,9 @@ export default () => (
         <img className={heroHands} src={hands} />
         <img className={heroLogo} src={logoWhite} />
         <span className={slogan}>Somethiasdasdasng something something blockchain.</span>
-        <BarChart></BarChart>
+        <BarChart data={FakeData.fakeValues()} label="chart 1"></BarChart>
+        <BarChart data={FakeData.fakeValues()} label="chart 2"></BarChart>
+        <BarChart data={FakeData.fakeValues()} label="chart 3"></BarChart>
       </Col>
     </Center>
     <Col className={card}>
