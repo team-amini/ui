@@ -107,28 +107,28 @@ export default class ActivityView extends Component {
       <div style={{display:'flex', 'justifyContent':'center', margin: '5px'}}>
         <table>
           <thead>
-            <tr><th>Sender</th><th># TX</th></tr>
+            <tr><th>Top Senders</th><th># TX</th></tr>
           </thead>
           <tbody>{topSendersByTX}</tbody>
         </table>
 
         <table>
           <thead>
-            <tr><th>Sender</th><th>Amt</th></tr>
+            <tr><th>Top Senders</th><th>Amt</th></tr>
           </thead>
           <tbody>{topSendersByValue}</tbody>
         </table>
 
         <table>
           <thead>
-            <tr><th>Receiver</th><th># TX</th></tr>
+            <tr><th>Top Receivers</th><th># TX</th></tr>
           </thead>
           <tbody>{topReceiversByTX}</tbody>
         </table>
 
         <table>
           <thead>
-            <tr><th>Receiver</th><th>Amt</th></tr>
+            <tr><th>Top Receivers</th><th>Amt</th></tr>
           </thead>
           <tbody>{topReceiversByValue}</tbody>
         </table>
