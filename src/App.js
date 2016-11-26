@@ -9,7 +9,7 @@ import chartSvg from '../public/chart.svg'
 import BarChart from './components/BarChart'
 import MapView from './components/MapView'
 import ActivityView from './components/ActivityView'
-// import News from './components/News'
+import News from './components/News'
 import FakeData from './FakeData'
 import Login from './Login'
 
@@ -30,37 +30,27 @@ class App extends Component {
 
   render() {
   //if (!state.loggedIn) return <Login setState={setState} />
+    if (this.mapContainer) {
+      console.log(this.mapContainer.clientHeight)
+      console.log(this.mapContainer.clientWidth)
+    }
+
     return (
       <Layout>
-        <Center>
-          <Col className={heroContainer}>
-            <div style={{display: 'flex', justifyContent:'space-between', width:'100%'}}>
-              <MapView data={FakeData.fakeGeo()} />
-            </div>
-            <br/>
-            <div style={{display: 'flex', justifyContent:'space-between', width: '100%'}}>
-              <BarChart data={FakeData.fakeChartValues()} label="Chart 1" />
-              <ActivityView data={FakeData.fakeValues()} label="chart 2"/>
-            </div>
-          </Col>
-        </Center>
-        <Col className={card}>
-          <Row className={cardPadding}>
-            <Col flex="1">
-              <h1>We make your life easier by blah blah</h1>
-              <p>
-                Bacon ipsum dolor amet leberkas chicken tenderloin, beef ribs ground
-                round frankfurter doner porchetta. Burgdoggen turkey bacon andouille
-                cow pig prosciutto venison tongue ground round biltong drumstick beef
-                ribs picanha. Shankle hamburger sausage shank kielbasa boudin pork chop
-                alcatra pork belly. Kielbasa short ribs ham brisket, salami meatball
-                drumstick sirloin shank fatback chicken. Ham hock jowl pastrami turducken
-                leberkas, tri-tip porchetta beef landjaeger hamburger kevin picanha.
-              </p>
+        <Col className={heroContainer}>
+          <Row>
+            <Col flex="1" ref={node => this.mapContainer = node}>
+              {this.state.mapContainer &&
+                <MapView data={FakeData.fakeGeo()} />
+              }
             </Col>
-            <Center flex="1">
-              <img className={chart} src={chartSvg} />
-            </Center>
+            <Col flex="1">
+              <News />
+            </Col>
+          </Row>
+          <Row>
+            <BarChart data={FakeData.fakeChartValues()} label="Chart 1" />
+            <ActivityView data={FakeData.fakeValues()} label="chart 2"/>
           </Row>
         </Col>
       </Layout>
@@ -70,7 +60,6 @@ class App extends Component {
 
 let heroContainer = css({
   marginBottom: `200px`,
-  alignItems: `center`,
 })
 
 let heroHands = css({

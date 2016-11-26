@@ -10,8 +10,8 @@ export default class News extends Component {
 
   render() {
     return (
-      <div style={{margin: '5px'}}>
-         <div style={{height: '300px', width: '550px'}}>TODO</div>
+      <div>
+         <div>TODO</div>
       </div>
     )
   }
