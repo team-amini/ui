@@ -25,7 +25,7 @@ let b = {
   marginTop: `30px`,
 }
 
-export default () => (
+export default ({ setState }) => (
   <Center style={bg}>
     <Col spacing="15px" style={{ justifyContent: `center`, alignItems: `center` }}>
       <Row><img src={hands} style={{ width: `85px`, height: `75px` }} /></Row>
@@ -37,7 +37,7 @@ export default () => (
         <input style={s} type="password" placeholder="Password.." />
       </Row>
       <Row>
-        <button style={b}>LOGIN</button>
+        <button style={b} onClick={s => setState({...s, loggedIn: true })}>LOGIN</button>
       </Row>
     </Col>
   </Center>
