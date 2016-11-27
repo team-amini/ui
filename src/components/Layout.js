@@ -43,9 +43,12 @@ export default ({
       </Row>
     </Row>
     {currentPage === `Dashboard` &&
-      <Row className={viewing}>
-        CAD > BTC
-      </Row>
+      <Col>
+        <span style={{ color: `white` }}>Contract Type:</span>
+        <Row className={viewing}>
+          CONTRACT ID: 76192
+        </Row>
+      </Col>
     }
     <Row style={{ marginTop: `50px` }}>
       <Col className={sidebar}>

@@ -46,6 +46,20 @@ class App extends Component {
         ,
       },
     ],
+    createdAlerts: [
+      {
+        id: `fake`,
+        name: `Large Account Activity`,
+        created: new Date(),
+        disabled: false,
+        string:
+        `SELECT senderAccount, AVG(amount) as avgAmount
+            AS avergeAmount
+            FROM Event.win:time(30 seconds)
+            WHERE avgAmount > 35000
+            GROUP BY senderAccount`,
+      },
+    ],
     tooltip: null,
   }
 
