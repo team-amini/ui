@@ -169,6 +169,13 @@ debugger
   }
 
   render() {
-    return <svg id="nodelink" width="900" height="600" />
+    return (
+      <div>
+        <div style={{ color: `silver`, padding: `12px`, fontWeight: 100 }}>
+          Network Diagram
+        </div>
+        <svg id="nodelink" width="900" height="600" />
+      </div>
+    )
   }
 }
