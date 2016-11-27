@@ -53,6 +53,12 @@ class App extends Component {
   async componentDidMount() {
     source.onmessage = e => {
       console.log(JSON.parse(e.data))
+      this.setState({
+        actualAlerts: [
+          JSON.parse(e.data),
+          ...this.state.actualAlerts,
+        ],
+      })
     }
 
     let response = await fetch(`${api}/alerts`)
@@ -134,7 +140,10 @@ class App extends Component {
           }
 
           {this.state.currentPage === `View Alerts` &&
-            <AlertsTable actualAlerts={this.state.actualAlerts} />
+            <AlertsTable
+              actualAlerts={this.state.actualAlerts}
+              createdAlerts={this.state.createdAlerts}
+            />
           }
         </Col>
       </Layout>

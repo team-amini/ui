@@ -34,7 +34,7 @@ export default ({
                   className={viewBtn()}
                   style={{ width: `50px` }}
                   onClick={() => {
-                    handleAlertChange(x.string)
+                    handleAlertChange(x.string || x.epl)
                     updateAlertTitle({ target: { value: x.name }})
                   }}
                 >
@@ -43,20 +43,12 @@ export default ({
                 <Row
                   className={viewBtn(`rgb(235, 195, 106)`)}
                   style={{ width: `50px` }}
-                  onClick={() => {
-                    handleAlertChange(x.string)
-                    updateAlertTitle({ target: { value: x.name }})
-                  }}
                 >
                   <span>Disable</span>
                 </Row>
                 <Row
                   className={viewBtn(`rgb(237, 96, 96)`)}
                   style={{ width: `50px` }}
-                  onClick={() => {
-                    handleAlertChange(x.string)
-                    updateAlertTitle({ target: { value: x.name }})
-                  }}
                 >
                   <span>Delete</span>
                 </Row>
