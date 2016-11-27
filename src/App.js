@@ -12,6 +12,7 @@ import ActivityView from './components/ActivityView'
 import News from './components/News'
 import FakeData from './FakeData'
 import Login from './Login'
+import Alerts from './components/Alerts'
 import API from './API'
 
 let sourceUrl = `http://amini.canadaeast.cloudapp.azure.com:8080/stream`
@@ -20,6 +21,7 @@ let source = new EventSource(sourceUrl)
 
 class App extends Component {
   state = {
+    alerts: false,
     loggedIn: false,
     selectedTransaction: null,
     timeRange: {
@@ -30,6 +32,18 @@ class App extends Component {
       min: 250,
       max: 500,
     },
+    currentAlert: ``,
+    currentAlertTitle: ``,
+    createdAlerts: [
+      {
+        name: `Client sends 5 tx within single minute`,
+        created: new Date(),
+        string:
+          `SELECT userId,count(*) as totalViews
+              FROM Request.win:time(30 sec) GROUP BY userId`
+        ,
+      },
+    ],
   }
 
   componentDidMount() {
@@ -50,29 +64,44 @@ class App extends Component {
       <Layout
         handleAmountChange={(component, amountRange) => this.setState({ amountRange })}
         handleRangeChange={(component, timeRange) => this.setState({ timeRange })}
+        toggleAlerts={alerts => this.setState({ alerts })}
         {...this.state}
       >
         <Col>
-          <Row>
-            <Col flex="1">
-              <MapView data={FakeData.fakeGeo({ amountRange: this.state.amountRange })} />
-            </Col>
-            <Col flex="1" style={{ justifyContent: `center`, alignItems: `center` }}>
-              <News data={FakeData.fakeNews({ amountRange: this.state.amountRange })} />
-            </Col>
-          </Row>
-          <Row>
-            <Col flex="1" style={{ padding: `10px` }}>
-              <BarChart data={FakeData.fakeChartValues({ amountRange: this.state.amountRange })}/>
-            </Col>
-            <Col flex="1">
-              <ActivityView
-                selectedTransaction={this.state.selectedTransaction}
-                selectTransaction={selectedTransaction => this.setState({ selectedTransaction })}
-                data={FakeData.fakeValues({ amountRange: this.state.amountRange })}
-              />
-            </Col>
-          </Row>
+          {!this.state.alerts &&
+            <span>
+              <Row>
+                <Col flex="1">
+                  <MapView data={FakeData.fakeGeo({ amountRange: this.state.amountRange })} />
+                </Col>
+                <Col flex="1" style={{ justifyContent: `center`, alignItems: `center` }}>
+                  <News data={FakeData.fakeNews({ amountRange: this.state.amountRange })} />
+                </Col>
+              </Row>
+              <Row>
+                <Col flex="1" style={{ padding: `10px` }}>
+                  <BarChart data={FakeData.fakeChartValues({ amountRange: this.state.amountRange })}/>
+                </Col>
+                <Col flex="1">
+                  <ActivityView
+                    selectedTransaction={this.state.selectedTransaction}
+                    selectTransaction={selectedTransaction => this.setState({ selectedTransaction })}
+                    data={FakeData.fakeValues({ amountRange: this.state.amountRange })}
+                  />
+                </Col>
+              </Row>
+            </span>
+          }
+          {this.state.alerts &&
+            <Alerts
+              handleAlertChange={currentAlert => this.setState({ currentAlert })}
+              currentAlert={this.state.currentAlert}
+              clear={() => this.setState({ currentAlert: `` })}
+              createdAlerts={this.state.createdAlerts}
+              currentAlertTitle={this.state.currentAlertTitle}
+              updateAlertTitle={e => this.setState({ currentAlertTitle: e.target.value })}
+            />
+          }
         </Col>
       </Layout>
     )

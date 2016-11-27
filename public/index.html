@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="https://unpkg.com/leaflet@0.7.7/dist/leaflet.css" />
   -->
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.1/dist/leaflet.css" />
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
   <script src="https://unpkg.com/leaflet@1.0.1/dist/leaflet.js"></script>
   <script src="hotline.js"></script>
   <script src="bezier.js"></script>
@@ -160,7 +161,23 @@
   height: 1rem;
   position: relative;
   width: 100%; }
+#brace-editor {
+  width: 100% !important;
+  height: calc(100vh - 260px) !important;
+}
 
+::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+  color: #00d3b1;
+}
+::-moz-placeholder { /* Firefox 19+ */
+  color: #00d3b1;
+}
+:-ms-input-placeholder { /* IE 10+ */
+  color: #00d3b1;
+}
+:-moz-placeholder { /* Firefox 18- */
+  color: #00d3b1;
+}
     </style>
   </head>
   <body>

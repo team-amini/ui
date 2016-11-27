@@ -11,6 +11,8 @@ export default ({
   handleAmountChange,
   handleRangeChange,
   children,
+  toggleAlerts,
+  alerts,
 }) => (
   <Col>
     <Row className={header}>
@@ -28,6 +30,8 @@ export default ({
           handleRangeChange={handleRangeChange}
           amountRange={amountRange}
           handleAmountChange={handleAmountChange}
+          alerts={alerts}
+          toggleAlerts={toggleAlerts}
         />
       </Col>
       <Col flex="1">{children}</Col>

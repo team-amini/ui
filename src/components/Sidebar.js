@@ -8,9 +8,25 @@ export default ({
   handleRangeChange,
   amountRange,
   handleAmountChange,
+  toggleAlerts,
+  alerts,
 }) => {
   return (
     <Col className={white}>
+      <Row style={{ padding: `20px`, marginTop: `20px` }}>
+        {!alerts &&
+          <Row className={button} onClick={() => toggleAlerts(true)}>
+            <i className="fa fa-bell-o" style={{ marginRight: `10px` }}/>
+            <span>Show Alerts</span>
+          </Row>
+        }
+        {alerts &&
+          <Row className={button} onClick={() => toggleAlerts(false)}>
+            <i className="fa fa-bar-chart" style={{ marginRight: `10px` }}/>
+            <span>Show Dashboard</span>
+          </Row>
+        }
+      </Row>
       <Col style={{ padding: `20px`, marginTop: `20px` }}>
         <div style={{ color: `white`, paddingBottom: `30px` }}>Transaction Amount</div>
         <InputRange
@@ -40,5 +56,20 @@ export default ({
   )
 }
 
+let button = css({
+  justifyContent: `center`,
+  width: `100%`,
+  cursor: `pointer`,
+  color: `#00d3b1`,
+  border: `2px solid #00d3b1`,
+  borderRadius: `4px`,
+  padding: `8px 12px`,
+  transition: `all 0.18s ease`,
+  ':hover': {
+    backgroundColor: `#00d3b1`,
+    color: `#1e1e1e`,
+    borderColor: `#00d3b1`,
+  },
+})
 let white = css({ color: `white` })
 let items = css({ padding: `7px 0`, fontSize: `12px` })
