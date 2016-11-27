@@ -151,6 +151,9 @@ class App extends Component {
                   />
                 </Col>
               </Row>
+              <Nodelink
+                setTooltip={tooltip => this.setState({ tooltip })}
+              />
             </span>
           }
           {this.state.currentPage === `Manage Alerts` &&
@@ -172,9 +175,6 @@ class App extends Component {
               createdAlerts={this.state.createdAlerts}
             />
           }
-          <Nodelink
-            setTooltip={tooltip => this.setState({ tooltip })}
-          />
         </Col>
         <GTooltip tooltip={this.state.tooltip} />
       </Layout>
