@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import Layout from './components/Layout'
-import { style as css } from 'glamor'
 import { Row, Col } from './uikit/Flex'
 import GTooltip from './uikit/GTooltip'
 import BarChart from './components/BarChart'
@@ -12,10 +11,9 @@ import Alerts from './components/Alerts'
 import AlertsTable from './components/AlertsTable'
 import Login from './Login'
 import Nodelink from './components/Nodelink'
-import API from './API'
 
 let api = `http://amini.canadaeast.cloudapp.azure.com:8080`
-let sourceUrl = `http://amini.canadaeast.cloudapp.azure.com:8080/stream`
+let sourceUrl = `${api}/stream`
 let source = new EventSource(sourceUrl)
 
 class App extends Component {
@@ -70,7 +68,6 @@ class App extends Component {
 
   async componentDidMount() {
     source.onmessage = e => {
-      console.log(JSON.parse(e.data))
       this.setState({
         actualAlerts: [
           JSON.parse(e.data),
@@ -195,30 +192,5 @@ class App extends Component {
     )
   }
 }
-
-let heroHands = css({
-  width: `150px`,
-})
-
-let heroLogo = css({
-  width: `400px`,
-})
-
-let slogan = css({
-  fontSize: `20px`,
-  color: `white`,
-})
-
-let card = css({
-  backgroundColor: `white`,
-})
-
-let chart = css({
-  width: `350px`,
-})
-
-let cardPadding = css({
-  padding: `100px`,
-})
 
 export default App
