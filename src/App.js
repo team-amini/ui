@@ -168,7 +168,9 @@ class App extends Component {
               createdAlerts={this.state.createdAlerts}
             />
           }
-          <Nodelink />
+          <Nodelink
+            setTooltip={tooltip => this.setState({ tooltip })}
+          />
         </Col>
         <GTooltip tooltip={this.state.tooltip} />
       </Layout>
