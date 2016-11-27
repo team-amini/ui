@@ -98,7 +98,7 @@ export default class MapView extends Component {
         {this.state.node &&
           <div
             id="mapview"
-            style={{ width: `${this.state.node.clientWidth}px`, height: `400px` }}
+            style={{ width: `${this.state.node.clientWidth}px`, height: `360px` }}
           />
         }
       </div>

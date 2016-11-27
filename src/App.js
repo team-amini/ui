@@ -1,11 +1,7 @@
 import React, { Component } from 'react'
 import Layout from './components/Layout'
 import { style as css } from 'glamor'
-import { withState } from 'recompose'
-import { Row, Col, Center } from './uikit/Flex'
-import hands from '../public/hands.svg'
-import logoWhite from '../public/logo.png'
-import chartSvg from '../public/chart.svg'
+import { Row, Col } from './uikit/Flex'
 import BarChart from './components/BarChart'
 import MapView from './components/MapView'
 import ActivityView from './components/ActivityView'
@@ -13,15 +9,16 @@ import News from './components/News'
 import FakeData from './FakeData'
 import Login from './Login'
 import Alerts from './components/Alerts'
+import AlertsTable from './components/AlertsTable'
 import API from './API'
 
+let api = `http://amini.canadaeast.cloudapp.azure.com:8080`
 let sourceUrl = `http://amini.canadaeast.cloudapp.azure.com:8080/stream`
-
 let source = new EventSource(sourceUrl)
 
 class App extends Component {
   state = {
-    alerts: false,
+    currentPage: `Dashboard`,
     loggedIn: false,
     selectedTransaction: null,
     timeRange: {
@@ -34,10 +31,12 @@ class App extends Component {
     },
     currentAlert: ``,
     currentAlertTitle: ``,
+    actualAlerts: [],
     createdAlerts: [
       {
         name: `Client sends 5 tx within single minute`,
         created: new Date(),
+        enabled: true,
         string:
           `SELECT userId,count(*) as totalViews
               FROM Request.win:time(30 sec) GROUP BY userId`
@@ -46,15 +45,45 @@ class App extends Component {
     ],
   }
 
-  componentDidMount() {
-    this.api = new API()
+  constructor(props) {
+    super(props)
+    this.submitAlert = this.submitAlert.bind(this)
+  }
 
+  async componentDidMount() {
     source.onmessage = e => {
       console.log(JSON.parse(e.data))
     }
 
-    this.api.getHistory(1, 2).then(d => {
-      console.log(`API history`, d)
+    let response = await fetch(`${api}/alerts`)
+    let data = await response.json()
+
+    this.setState({
+      createdAlerts: [
+        ...this.state.createdAlerts,
+        ...data,
+      ],
+    })
+  }
+
+  async submitAlert() {
+    let response = await fetch(`${api}/alerts`, {
+      method: `POST`,
+      headers: { 'Content-Type': `application/json` },
+      body: JSON.stringify({
+        name: this.state.currentAlertTitle,
+        description: `Super Dumb`,
+        epl: this.state.currentAlert,
+      }),
+    })
+
+    let data = await response.json()
+
+    this.setState({
+      createdAlerts: [
+        ...this.state.createdAlerts,
+        data,
+      ],
     })
   }
 
@@ -64,11 +93,11 @@ class App extends Component {
       <Layout
         handleAmountChange={(component, amountRange) => this.setState({ amountRange })}
         handleRangeChange={(component, timeRange) => this.setState({ timeRange })}
-        toggleAlerts={alerts => this.setState({ alerts })}
+        setPage={currentPage => this.setState({ currentPage })}
         {...this.state}
       >
         <Col>
-          {!this.state.alerts &&
+          {this.state.currentPage === `Dashboard` &&
             <span>
               <Row>
                 <Col flex="1">
@@ -80,7 +109,7 @@ class App extends Component {
               </Row>
               <Row>
                 <Col flex="1" style={{ padding: `10px` }}>
-                  <BarChart data={FakeData.fakeChartValues({ amountRange: this.state.amountRange })}/>
+                  <BarChart data={FakeData.fakeChartValues({ amountRange: this.state.amountRange })} />
                 </Col>
                 <Col flex="1">
                   <ActivityView
@@ -92,15 +121,20 @@ class App extends Component {
               </Row>
             </span>
           }
-          {this.state.alerts &&
+          {this.state.currentPage === `Manage Alerts` &&
             <Alerts
               handleAlertChange={currentAlert => this.setState({ currentAlert })}
               currentAlert={this.state.currentAlert}
-              clear={() => this.setState({ currentAlert: `` })}
+              clear={() => this.setState({ currentAlert: ``, currentAlertTitle: `` })}
               createdAlerts={this.state.createdAlerts}
               currentAlertTitle={this.state.currentAlertTitle}
               updateAlertTitle={e => this.setState({ currentAlertTitle: e.target.value })}
+              submitAlert={this.submitAlert}
             />
+          }
+
+          {this.state.currentPage === `View Alerts` &&
+            <AlertsTable actualAlerts={this.state.actualAlerts} />
           }
         </Col>
       </Layout>

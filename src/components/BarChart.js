@@ -82,16 +82,20 @@ export default class BarChart extends Component {
   render() {
     return (
       <div
+        style={{ padding: `10px` }}
         ref={
           node => {
             !this.state.node && this.setState({ node })
           }
         }
       >
+        <div style={{ color: `silver`, padding: `12px`, fontWeight: 100 }}>
+          Transaction Volume
+        </div>
         {this.state.node &&
           <div
             ref={node => this.chartNode = node}
-            style={{ width: `${this.state.node.clientWidth}px`, height: `300px` }}
+            style={{ width: `${this.state.node.clientWidth - 35}px`, height: `250px` }}
           />
         }
       </div>

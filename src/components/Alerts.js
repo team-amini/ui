@@ -13,24 +13,14 @@ export default ({
   createdAlerts,
   currentAlertTitle,
   updateAlertTitle,
+  submitAlert,
 }) => {
   return (
     <Col>
       <Row>
-        <Col className={white} flex="1" style={{ padding: `20px` }}>
-          <span style={{ fontWeight: 100, marginBottom: `10px` }}>Existing Alerts</span>
-          {createdAlerts.map(x =>
-            <Row key={x.name}>
-              <Row
-                className={viewBtn}
-                style={{ width: `80px`, margin: 0 }}
-                onClick={() => {
-                  handleAlertChange(x.string)
-                  updateAlertTitle(x.name)
-                }}
-              >
-                <span>View</span>
-              </Row>
+        <Col className={white} flex="1" style={{ padding: `20px` }} spacing="20px">
+          {createdAlerts.map((x, i) =>
+            <Row key={i} spacing="5px">
               <Col style={{ marginLeft: `8px` }}>
                 <span style={{ fontSize: `15px`, color: `#00d3b1` }}>{x.name}</span>
                 <Row style={{ marginTop: `2px` }}>
@@ -39,6 +29,38 @@ export default ({
                   </span>
                 </Row>
               </Col>
+              <Row style={{ marginLeft: `auto` }}>
+                <Row
+                  className={viewBtn()}
+                  style={{ width: `50px` }}
+                  onClick={() => {
+                    handleAlertChange(x.string)
+                    updateAlertTitle({ target: { value: x.name }})
+                  }}
+                >
+                  <span>View</span>
+                </Row>
+                <Row
+                  className={viewBtn(`rgb(235, 195, 106)`)}
+                  style={{ width: `50px` }}
+                  onClick={() => {
+                    handleAlertChange(x.string)
+                    updateAlertTitle({ target: { value: x.name }})
+                  }}
+                >
+                  <span>Disable</span>
+                </Row>
+                <Row
+                  className={viewBtn(`rgb(237, 96, 96)`)}
+                  style={{ width: `50px` }}
+                  onClick={() => {
+                    handleAlertChange(x.string)
+                    updateAlertTitle({ target: { value: x.name }})
+                  }}
+                >
+                  <span>Delete</span>
+                </Row>
+              </Row>
             </Row>
           )}
         </Col>
@@ -55,10 +77,10 @@ export default ({
             theme="monokai"
             onChange={handleAlertChange}
             value={currentAlert}
+            enableBasicAutocompletion
           />
-
           <Row spacing="20px">
-            <Row className={button} flex="1">
+            <Row className={button} onClick={submitAlert} flex="1">
               <span>Submit</span>
             </Row>
             <Row className={button} onClick={clear} flex="1">
@@ -83,19 +105,20 @@ let input = css({
 
 let white = css({ color: `white` })
 
-let viewBtn = css({
-  marginTop: `30px`,
+let viewBtn = color => css({
   justifyContent: `center`,
   cursor: `pointer`,
-  color: `#00d3b1`,
-  border: `2px solid #00d3b1`,
+  color: `${color || `#00d3b1`}`,
+  marginLeft: `8px`,
+  border: `2px solid ${color || `#00d3b1`}`,
   borderRadius: `4px`,
   padding: `8px 12px`,
+  fontSize: `12px`,
   transition: `all 0.18s ease`,
   ':hover': {
-    backgroundColor: `#00d3b1`,
+    backgroundColor: `${color || `#00d3b1`}`,
     color: `#1e1e1e`,
-    borderColor: `#00d3b1`,
+    borderColor: `${color || `#00d3b1`}`,
   },
 })
 

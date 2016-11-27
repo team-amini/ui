@@ -8,25 +8,9 @@ export default ({
   handleRangeChange,
   amountRange,
   handleAmountChange,
-  toggleAlerts,
-  alerts,
 }) => {
   return (
     <Col className={white}>
-      <Row style={{ padding: `20px`, marginTop: `20px` }}>
-        {!alerts &&
-          <Row className={button} onClick={() => toggleAlerts(true)}>
-            <i className="fa fa-bell-o" style={{ marginRight: `10px` }}/>
-            <span>Show Alerts</span>
-          </Row>
-        }
-        {alerts &&
-          <Row className={button} onClick={() => toggleAlerts(false)}>
-            <i className="fa fa-bar-chart" style={{ marginRight: `10px` }}/>
-            <span>Show Dashboard</span>
-          </Row>
-        }
-      </Row>
       <Col style={{ padding: `20px`, marginTop: `20px` }}>
         <div style={{ color: `white`, paddingBottom: `30px` }}>Transaction Amount</div>
         <InputRange
