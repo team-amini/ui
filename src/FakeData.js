@@ -1,5 +1,11 @@
 import _ from 'lodash'
-import data from './data'
+import d from './transactions'
+
+let data = d.map(x => ({
+  ...x,
+  transactiontime: +new Date(x.transactionTime),
+  amount: Math.round(x.amount),
+}))
 
 export default class FakeData {
 

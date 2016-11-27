@@ -4,7 +4,7 @@ export default ({ data }) => {
   return (
     <div style={{ width: `100%`, padding: `20px` }}>
       <div style={{ color: `silver`, padding: `12px`, fontWeight: 100 }}>
-        Latest Transacions
+        Latest Transactions
       </div>
       <table style={{ width: `100%` }}>
         <thead>

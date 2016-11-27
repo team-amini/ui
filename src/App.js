@@ -2,12 +2,12 @@ import React, { Component } from 'react'
 import Layout from './components/Layout'
 import { style as css } from 'glamor'
 import { Row, Col } from './uikit/Flex'
+import GTooltip from './uikit/GTooltip'
 import BarChart from './components/BarChart'
 import MapView from './components/MapView'
 import ActivityView from './components/ActivityView'
 import News from './components/News'
 import FakeData from './FakeData'
-import Login from './Login'
 import Alerts from './components/Alerts'
 import AlertsTable from './components/AlertsTable'
 import API from './API'
@@ -19,7 +19,6 @@ let source = new EventSource(sourceUrl)
 class App extends Component {
   state = {
     currentPage: `Dashboard`,
-    loggedIn: false,
     selectedTransaction: null,
     timeRange: {
       min: 2,
@@ -34,15 +33,17 @@ class App extends Component {
     actualAlerts: [],
     createdAlerts: [
       {
+        id: `fake`,
         name: `Client sends 5 tx within single minute`,
         created: new Date(),
-        enabled: true,
+        disabled: false,
         string:
           `SELECT userId,count(*) as totalViews
               FROM Request.win:time(30 sec) GROUP BY userId`
         ,
       },
     ],
+    tooltip: null,
   }
 
   constructor(props) {
@@ -93,8 +94,25 @@ class App extends Component {
     })
   }
 
+  async toggleEnabled(alert) {
+    let disabled = !alert.disabled
+    let i = this.state.createdAlerts.findIndex(x => x.id === alert.id)
+
+    fetch(`${api}/alerts/${alert.id}/${disabled ? `disable` : `enable`}`, { method: `PUT` })
+
+    this.setState({
+      createdAlerts: [
+        ...(this.state.createdAlerts.slice(0, i)),
+        {
+          ...alert,
+          disabled,
+        },
+        ...(this.state.createdAlerts.slice(i + 1, Infinity)),
+      ],
+    })
+  }
+
   render() {
-    //if (!state.loggedIn) return <Login setState={setState} />
     return (
       <Layout
         handleAmountChange={(component, amountRange) => this.setState({ amountRange })}
@@ -115,7 +133,10 @@ class App extends Component {
               </Row>
               <Row>
                 <Col flex="1" style={{ padding: `10px` }}>
-                  <BarChart data={FakeData.fakeChartValues({ amountRange: this.state.amountRange })} />
+                  <BarChart
+                    data={FakeData.fakeChartValues({ amountRange: this.state.amountRange })}
+                    setTooltip={tooltip => this.setState({ tooltip })}
+                  />
                 </Col>
                 <Col flex="1">
                   <ActivityView
@@ -136,6 +157,7 @@ class App extends Component {
               currentAlertTitle={this.state.currentAlertTitle}
               updateAlertTitle={e => this.setState({ currentAlertTitle: e.target.value })}
               submitAlert={this.submitAlert}
+              toggleEnabled={alert => this.toggleEnabled(alert)}
             />
           }
 
@@ -146,6 +168,7 @@ class App extends Component {
             />
           }
         </Col>
+        <GTooltip tooltip={this.state.tooltip} />
       </Layout>
     )
   }

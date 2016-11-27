@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import Tooltip from '../uikit/Tooltip'
 import * as d3 from 'd3'
 
 export default class BarChart extends Component {
@@ -38,7 +39,7 @@ export default class BarChart extends Component {
       .attr('preserveAspectRatio', 'xMinYMin')
 
     let g = svg.append('g')
-
+    //
     g.append('path')
       .datum(data)
       .attr('d', path)
@@ -48,16 +49,16 @@ export default class BarChart extends Component {
 
     let yFn2 = d => d.numTrans
     let yExtent2 = d3.extent(data.map(yFn2))
-    let y2 = d3.scaleLinear().domain(yExtent2).range([h-yoffset, h*0.7])
+    let y2 = d3.scaleLinear().domain(yExtent2).range([h - yoffset, h * 0.7])
 
     g.selectAll('.bars')
       .data(data)
       .enter()
       .append('rect')
       .classed('bars', true)
-      .attr('x', (d)=>x(xFn(d)))
-      .attr('y', (d)=>y2(yFn2(d)))
-      .attr('height', (d, i)=> { return h - y2(yFn2(d)) - yoffset})
+      .attr('x', d => x(xFn(d)))
+      .attr('y', d => y2(yFn2(d)))
+      .attr('height', (d, i) => h - y2(yFn2(d)) - yoffset)
       .attr('width', 2)
       .style('fill', '#888')
       .style('fill-opacity', 0.6)

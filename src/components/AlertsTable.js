@@ -1,4 +1,5 @@
 import React from 'react'
+import _ from 'lodash'
 import moment from 'moment'
 
 export default ({ actualAlerts, createdAlerts }) => {
@@ -17,9 +18,15 @@ export default ({ actualAlerts, createdAlerts }) => {
           {actualAlerts.slice(0, 20).map((x, i) =>
             <tr key={i}>
               <td>{x.id}</td>
-              <td>{createdAlerts.find(y => y.id === x.id).name}</td>
+              <td style={{ color: `#ff006f` }}>
+                {(createdAlerts.find(y => y.id === x.id) || {}).name}
+              </td>
               <td>{moment(x.timestamp).format(`MMMM Do YYYY, h:mm:ss a`)}</td>
-              <td><pre>{JSON.stringify(x.data, null, 2)}</pre></td>
+              <td>
+                {x.data && Object.entries(x.data).map(([key, val], i) =>
+                  <div key={i}>{_.startCase(key)}: {val}</div>
+                )}
+              </td>
             </tr>
           )}
         </tbody>

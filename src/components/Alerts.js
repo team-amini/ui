@@ -14,6 +14,7 @@ export default ({
   currentAlertTitle,
   updateAlertTitle,
   submitAlert,
+  toggleEnabled,
 }) => {
   return (
     <Col>
@@ -43,8 +44,9 @@ export default ({
                 <Row
                   className={viewBtn(`rgb(235, 195, 106)`)}
                   style={{ width: `50px` }}
+                  onClick={() => toggleEnabled(x)}
                 >
-                  <span>Disable</span>
+                  <span>{x.disabled ? `Enable` : `Disable`}</span>
                 </Row>
                 <Row
                   className={viewBtn(`rgb(237, 96, 96)`)}
