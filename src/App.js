@@ -10,6 +10,7 @@ import News from './components/News'
 import FakeData from './FakeData'
 import Alerts from './components/Alerts'
 import AlertsTable from './components/AlertsTable'
+import Nodelink from './components/Nodelink'
 import API from './API'
 
 let api = `http://amini.canadaeast.cloudapp.azure.com:8080`
@@ -167,6 +168,7 @@ class App extends Component {
               createdAlerts={this.state.createdAlerts}
             />
           }
+          <Nodelink />
         </Col>
         <GTooltip tooltip={this.state.tooltip} />
       </Layout>
