@@ -1,5 +1,5 @@
 import _ from 'lodash'
-import d from './transactions'
+import d from './transactions-clique'
 
 let data = d.map(x => ({
   ...x,
