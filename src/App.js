@@ -10,6 +10,7 @@ import News from './components/News'
 import FakeData from './FakeData'
 import Alerts from './components/Alerts'
 import AlertsTable from './components/AlertsTable'
+import Login from './Login'
 import API from './API'
 
 let api = `http://amini.canadaeast.cloudapp.azure.com:8080`
@@ -20,6 +21,7 @@ class App extends Component {
   state = {
     currentPage: `Dashboard`,
     selectedTransaction: null,
+    loggedIn: false,
     timeRange: {
       min: 2,
       max: 10,
@@ -34,7 +36,7 @@ class App extends Component {
     createdAlerts: [
       {
         id: `fake`,
-        name: `Client sends 5 tx within single minute`,
+        name: `Balance Depletion`,
         created: new Date(),
         disabled: false,
         string:
@@ -113,6 +115,8 @@ class App extends Component {
   }
 
   render() {
+    if (!this.state.loggedIn) return <Login logIn={() => this.setState({ loggedIn: true })} />
+
     return (
       <Layout
         handleAmountChange={(component, amountRange) => this.setState({ amountRange })}

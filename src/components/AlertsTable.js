@@ -15,7 +15,7 @@ export default ({ actualAlerts, createdAlerts }) => {
           </tr>
         </thead>
         <tbody>
-          {actualAlerts.slice(0, 20).map((x, i) =>
+          {actualAlerts.filter(x => x.type === `alert`).slice(0, 20).map((x, i) =>
             <tr key={i}>
               <td>{x.id}</td>
               <td style={{ color: `#ff006f` }}>

@@ -42,6 +42,11 @@ export default ({
         </Row>
       </Row>
     </Row>
+    {currentPage === `Dashboard` &&
+      <Row className={viewing}>
+        CAD > BTC
+      </Row>
+    }
     <Row style={{ marginTop: `50px` }}>
       <Col className={sidebar}>
         <Sidebar
@@ -55,6 +60,19 @@ export default ({
     </Row>
   </Col>
 )
+
+let viewing = css({
+  position: `fixed !important`,
+  marginTop: `30px`,
+  color: `white`,
+  padding: `50px`,
+  fontSize: `25px`,
+  zIndex: 1000,
+  color: `#00d3b1`,
+  textTransform: `uppercase`,
+  marginLeft: `260px`,
+  fontFamily: `'Bungee Inline', cursive`,
+})
 
 let heart = css({
   position: `relative`,
