@@ -7,7 +7,7 @@ let data = d.map(x => ({
   amount: Math.round(x.amount),
 }))
 
-export default class FakeData {
+export default class SimuData {
 
   static num = 50
 

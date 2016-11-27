@@ -21,7 +21,7 @@ export default ({
         />
       </Col>
       <Col style={{ padding: `20px`, marginTop: `20px` }}>
-        <div style={{ color: `white`, paddingBottom: `30px` }}>Date Range</div>
+        <div style={{ color: `white`, paddingBottom: `30px` }}>Range</div>
         <InputRange
           maxValue={20}
           minValue={0}

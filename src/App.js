@@ -7,7 +7,7 @@ import BarChart from './components/BarChart'
 import MapView from './components/MapView'
 import ActivityView from './components/ActivityView'
 import News from './components/News'
-import FakeData from './FakeData'
+import SimuData from './SimuData'
 import Alerts from './components/Alerts'
 import AlertsTable from './components/AlertsTable'
 import Login from './Login'
@@ -144,16 +144,16 @@ class App extends Component {
             <span>
               <Row>
                 <Col flex="1">
-                  <MapView data={FakeData.fakeGeo({ amountRange: this.state.amountRange })} />
+                  <MapView data={SimuData.fakeGeo({ amountRange: this.state.amountRange })} />
                 </Col>
                 <Col flex="1" style={{ justifyContent: `center`, alignItems: `center` }}>
-                  <News data={FakeData.fakeNews({ amountRange: this.state.amountRange })} />
+                  <News data={SimuData.fakeNews({ amountRange: this.state.amountRange })} />
                 </Col>
               </Row>
               <Row>
                 <Col flex="1" style={{ padding: `10px` }}>
                   <BarChart
-                    data={FakeData.fakeChartValues({ amountRange: this.state.amountRange })}
+                    data={SimuData.fakeChartValues({ amountRange: this.state.amountRange })}
                     setTooltip={tooltip => this.setState({ tooltip })}
                   />
                 </Col>
@@ -161,7 +161,7 @@ class App extends Component {
                   <ActivityView
                     selectedTransaction={this.state.selectedTransaction}
                     selectTransaction={selectedTransaction => this.setState({ selectedTransaction })}
-                    data={FakeData.fakeValues({ amountRange: this.state.amountRange })}
+                    data={SimuData.fakeValues({ amountRange: this.state.amountRange })}
                   />
                 </Col>
               </Row>
